@@ -131,5 +131,14 @@ public class WebController {
         modelAndView.addObject("users", listAllUsers());
         return modelAndView;
     }
-
+    
+    /********* Addition **********
+     * This method adds two numbers
+     */
+    @RequestMapping(value = "/cs480/{num1}/{num2}", method = RequestMethod.GET)
+    int addNumbers(
+    		@PathVariable("num1") int num1,
+    		@PathVariable("num2") int num2) {    	
+    	return num1 + num2;
+    }
 }
