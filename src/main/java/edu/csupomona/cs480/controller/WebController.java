@@ -141,4 +141,15 @@ public class WebController {
     		@PathVariable("num2") int num2) {    	
     	return num1 + num2;
     }
+    
+    /********* Multiplication **********
+     * This method multiplies two numbers
+     * Author: Chantal
+     */
+    @RequestMapping(value = "/cs480/mult/{num1}/{num2}", method = RequestMethod.GET)
+    int multiplyNumbers(
+    		@PathVariable("num1") int num1,
+    		@PathVariable("num2") int num2) {    	
+    	return num1 * num2;
+    }
 }
