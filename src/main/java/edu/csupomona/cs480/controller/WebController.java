@@ -152,4 +152,12 @@ public class WebController {
     		@PathVariable("num2") int num2) {    	
     	return num1 * num2;
     }
+    /********* Print hello **********
+     * This method simply prints "hello"
+     * Author: Marion Levy
+     */
+    @RequestMapping(value = "/hello", method = RequestMethod.GET)
+    String sayHello() {
+        return "Hello";
+    }
 }
