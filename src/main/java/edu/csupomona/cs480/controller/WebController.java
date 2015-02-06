@@ -1,5 +1,7 @@
 package edu.csupomona.cs480.controller;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import edu.csupomona.cs480.ParseHtml;
 import edu.csupomona.cs480.data.User;
 import edu.csupomona.cs480.data.provider.UserManager;
 
+import com.google.common.collect.Ordering;
 
 /**
  * This is the controller used by Spring framework.
@@ -161,6 +164,17 @@ public class WebController {
 	@RequestMapping(value = "/hello", method = RequestMethod.GET)
 	String sayHello() {
 		return "Hello";
+	}
+	
+	/********* Sort 3 Numbers (Assignment 5) **********
+	 * This method sorts and prints out 3 numbers using guava dependency
+	 * Author: Marion Levy
+	 */
+	@RequestMapping(value = "/sortThree/{num1}/{num2}/{num3}", method = RequestMethod.GET)
+	String sortThree(@PathVariable("num1") int num1, @PathVariable("num2") int num2, @PathVariable("num3") int num3) {
+		List<Integer> toSort = Arrays.asList(num1, num2, num3);
+		Collections.sort(toSort, Ordering.natural());
+		return toSort.toString();
 	}
 
 	/******Parse webpage for links*****
