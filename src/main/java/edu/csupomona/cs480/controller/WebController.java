@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import edu.csupomona.cs480.App;
+import edu.csupomona.cs480.GsonExample;
 import edu.csupomona.cs480.ParseHtml;
 import edu.csupomona.cs480.data.User;
 import edu.csupomona.cs480.data.provider.UserManager;
@@ -136,15 +137,7 @@ public class WebController {
 		return modelAndView;
 	}
 
-	/********* Addition **********
-	 * This method adds two numbers
-	 */
-	@RequestMapping(value = "/cs480/{num1}/{num2}", method = RequestMethod.GET)
-	int addNumbers(
-			@PathVariable("num1") int num1,
-			@PathVariable("num2") int num2) {    	
-		return num1 + num2;
-	}
+	
 
 	/********* Multiplication **********
 	 * This method multiplies two numbers
@@ -176,7 +169,7 @@ public class WebController {
 		Collections.sort(toSort, Ordering.natural());
 		return toSort.toString();
 	}
-
+	
 	/******Parse webpage for links*****
 	 * Scrapes google search results for top 10 links.
 	 * http://localhost:8080/parse query="query"
@@ -189,5 +182,28 @@ public class WebController {
 			) {
 		ParseHtml p = new ParseHtml();
 		return p.ParseURL(query);
+	}
+	
+	/*********Assignemnt 3: Addition **********
+	 * This method adds two numbers
+	 * Author: Ashley Barton
+	 */
+	@RequestMapping(value = "/cs480/{num1}/{num2}", method = RequestMethod.GET)
+	int addNumbers(
+			@PathVariable("num1") int num1,
+			@PathVariable("num2") int num2) {    	
+		return num1 + num2;
+	}
+	
+	/****** Assignment 5: GSON Parsing *****
+	 * Using GSON (Google Json Parser) to parse Java Objects
+	 * http://localhost:8080/printingJson
+	 * Author: Ashley Barton
+	 * @return 
+	 */
+	@RequestMapping(value = "/printingJson", method = RequestMethod.GET)
+	String printJson(){
+		GsonExample ex = new GsonExample();
+		return ex.getJSON();
 	}
 }
