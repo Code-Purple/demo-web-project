@@ -1,8 +1,10 @@
 package edu.csupomona.cs480.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -171,6 +173,7 @@ public class WebController {
 	}
 	
 	/******Parse webpage for links*****
+	 * Assignment 5
 	 * Scrapes google search results for top 10 links.
 	 * http://localhost:8080/parse query="query"
 	 * use postman to test
@@ -205,5 +208,27 @@ public class WebController {
 	String printJson(){
 		GsonExample ex = new GsonExample();
 		return ex.getJSON();
+	}
+	
+	/**
+	 * Return the date
+	 */
+	@RequestMapping(value = "/cs480/date", method = RequestMethod.GET)
+	String date()
+	{
+		Date d = new Date(System.currentTimeMillis());
+		SimpleDateFormat f = new SimpleDateFormat("MM-dd-yyyy");
+		return f.format(d);
+	}
+	
+	/**
+	 * Return the time is hh:mm:ss, 12 hour format
+	 */
+	@RequestMapping(value = "/cs480/time", method = RequestMethod.GET)
+	String time()
+	{
+		Date d = new Date(System.currentTimeMillis());
+		SimpleDateFormat f = new SimpleDateFormat("hh:mm:ss a");
+		return f.format(d);
 	}
 }
