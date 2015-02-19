@@ -1,4 +1,4 @@
-PEON: Personal Entertainment and Organization Navigation
+**PEON: Personal Entertainment and Organization Navigation
 
 Overview
 --------
