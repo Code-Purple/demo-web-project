@@ -14,16 +14,11 @@
         var textArea = $('#speech-page-content');
         var textAreaID = 'speech-page-content';
 
-        $('.speech-mic').click(function(){
+        $("#enable-speech").click(function(){
             startRecognition();
         });
 
-        $('.speech-mic-works').click(function(){
-            recognition.stop();
-        });
-
         var startRecognition = function() {
-            $('.speech-content-mic').removeClass('speech-mic').addClass('speech-mic-works');
             textArea.focus();
             recognition.start();
         };
@@ -42,10 +37,6 @@
                     interimResult += event.results[i][0].transcript + '\u200B';
                 }
             }
-        };
-
-        recognition.onend = function() {
-            $('.speech-content-mic').removeClass('speech-mic-works').addClass('speech-mic');
         };
     });
 })(jQuery);

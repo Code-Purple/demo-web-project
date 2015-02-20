@@ -1,13 +1,20 @@
 <html>
-	<!-- This page will be shown when you git the root URL -->
-	<head>
-	    <title>CS480 Demo HomePage</title>
-	    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-	    <script src="/js/home-control.js"></script>
-	</head>
-
-	<body onload="healthCheck();">
-		Demo Project is running: <label id="status"></label>
-	</body>
-
+<head>
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/textarea-helper.js"></script>
+<script type="text/javascript" src="/js/web-speech-test.js"></script>
+</head>
+<body>
+	<div id="main">
+		<div id="content">
+			<h1 id="about">PEON</h1>
+			<h2 id="moreabout">Personal Entertainment and Organization
+				Navigation</h2>
+			<input type="button" id="enable-speech" value="Enable Speech" /> <br>
+			<br>
+			<textarea id="speech-page-content" name="pageContent"></textarea>
+		</div>
+	</div>
+</body>
 </html>
