@@ -1,51 +1,57 @@
 (function($) {
 
-    $(document).ready(function() {
+	$(document).ready(function() {
 
-        try {
-            var recognition = new webkitSpeechRecognition();
-        } catch(e) {
-            var recognition = Object;
-        }
-        recognition.continuous = true;
-        recognition.interimResults = true;
+		try {
+			var recognition = new webkitSpeechRecognition();
+		} catch(e) {
+			var recognition = Object;
+		}
+		recognition.continuous = true;
+		recognition.interimResults = false;
+		recognition.lang = 'en';
 
-        var interimResult = '';
-        var textArea = $('#speech-page-content');
-        var textAreaID = 'speech-page-content';
+		var interimResult = '';
+		var textArea = $('#speech-page-content');
+		var textAreaID = 'speech-page-content';
+		var confidenceThresh = 0.5;
 
-        $('.speech-mic').click(function(){
-            startRecognition();
-        });
+		// function called when enable is pressed
+		$("#enable-speech").click(function(){
+			startRecognition();
+		});
 
-        $('.speech-mic-works').click(function(){
-            recognition.stop();
-        });
+		var startRecognition = function() {
+			textArea.focus();
+			recognition.start();
+		};
 
-        var startRecognition = function() {
-            $('.speech-content-mic').removeClass('speech-mic').addClass('speech-mic-works');
-            textArea.focus();
-            recognition.start();
-        };
+		// function that checks existence of s in str
+		var userSaid = function(str, s) {
+			return str.indexOf(s) > -1;
+		}
 
-        recognition.onresult = function (event) {
-            var pos = textArea.getCursorPosition() - interimResult.length;
-            textArea.val(textArea.val().replace(interimResult, ''));
-            interimResult = '';
-            textArea.setCursorPosition(pos);
-            for (var i = event.resultIndex; i < event.results.length; ++i) {
-                if (event.results[i].isFinal) {
-                    insertAtCaret(textAreaID, event.results[i][0].transcript);
-                } else {
-                    isFinished = false;
-                    insertAtCaret(textAreaID, event.results[i][0].transcript + '\u200B');
-                    interimResult += event.results[i][0].transcript + '\u200B';
-                }
-            }
-        };
+		recognition.onresult = function (event) 
+		{
+			var text;
+			for (var i = event.resultIndex; i < event.results.length; ++i) 
+			{
+				if (event.results[i].isFinal) 
+				{
+					if (parseFloat(event.results[i][0].confidence) >= parseFloat(confidenceThresh))
+					{
+						text = event.results[i][0].transcript;
+						insertAtCaret(textAreaID, event.results[i][0].transcript);
 
-        recognition.onend = function() {
-            $('.speech-content-mic').removeClass('speech-mic-works').addClass('speech-mic');
-        };
-    });
+						// test to see if word recognizer works
+						if (userSaid(text, 'ad'))
+						{
+							console.log('add')
+						}
+
+					}
+				}
+			}
+		};
+	});
 })(jQuery);
