@@ -1,7 +1,7 @@
-<<<<<<< HEAD
 @charset 'UTF-8';
 @import url("font-awesome.min.css");
 @import url("http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,900,300italic");
+@import url("http://fonts.googleapis.com/css?family=Jura:300,400,700,900,300italic");
 
 /*
 	Dopetrope by HTML5 UP
@@ -16,7 +16,7 @@
 	body
 	{
 		background: #252122;
-		background-image: url('images/bg02.png');
+		background-image: url("/images/bg.png");
 	}
 
 		body.is-loading * {
@@ -34,7 +34,7 @@
 
 	body,input,textarea,select
 	{
-		font-family: 'Source Sans Pro';
+		font-family: 'Jura';
 		font-weight: 300;
 		color: #5d5d5d;
 	}
@@ -76,12 +76,20 @@
 		color: #252122;
 		font-weight: 700;
 	}
+	
+	h10
+	{
+		font-size: 2.5em;
+		color: #252122;
+		font-weight: 900;
+		text-align: center;
+	}
 
-		h1 a, h2 a, h3 a, h4 a, h5 a, h6 a
-		{
-			color: inherit;
-			text-decoration: none;
-		}
+	h1 a, h2 a, h3 a, h4 a, h5 a, h6 a
+	{
+		color: inherit;
+		text-decoration: none;
+	}
 
 	a
 	{
@@ -281,6 +289,7 @@
 					display: inline;
 					margin: 0;
 					padding: 0 1em 0 1em;
+					
 				}
 
 	/* Box */
@@ -691,11 +700,12 @@
 
 	#banner
 	{
-		background: #CCE8F4 url('../images/pic01.jpg');
+		background: #CCE8F4 url('../images/purple_lines.jpg');
 		background-position: center center;
 		background-size: auto 100%;
-		background-repeat: no-repeat;
+		background-repeat: x-repeat;
 		text-align: center;
+		filter: blur(2em);
 	}
 
 		#banner header
@@ -757,6 +767,20 @@
 				background: #f7f7f7 url('images/bg02.png');
 			}
 	
+	.logo_container {
+	    width: 500px;
+	    height: 355px;
+	    background: #aaa;
+	    text-align: center;
+	    line-height: 300px;
+	}
+
+	.logo_container img {
+    	margin-top: 10px;
+    	vertical-align: middle;
+	}
+
+		
 	#footer-wrapper
 	{
 		position: relative;
