@@ -3,20 +3,13 @@
 @import url("http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,900,300italic");
 @import url("http://fonts.googleapis.com/css?family=Jura:300,400,700,900,300italic");
 
-/*
-	Dopetrope by HTML5 UP
-	html5up.net | @n33co
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-*/
-
 /*********************************************************************************/
 /* Basic                                                                         */
 /*********************************************************************************/
 
 	body
 	{
-		background: #252122;
-		background-image: url("/images/bg.png");
+		background-color: #B9C478;
 	}
 
 		body.is-loading * {
@@ -118,6 +111,19 @@
 	p, ul, ol, dl, table
 	{
 		margin-bottom: 2em;
+	}
+	
+	.logo_container {
+	    width: 500px;
+	    height: 355px;
+	    background: #aaa;
+	    text-align: center;
+	    line-height: 300px;
+	}
+
+	.logo_container img {
+    	margin-top: 10px;
+    	vertical-align: middle;
 	}
 
 	/* Form */
@@ -243,54 +249,7 @@
 				{
 				}
 
-	/* Section/Article */
 	
-		section,
-		article
-		{
-			margin-bottom: 2.5em;
-		}
-		
-			section > :last-child,
-			article > :last-child
-			{
-				margin-bottom: 0;
-			}
-
-			section:last-child,
-			article:last-child
-			{
-				margin-bottom: 0;
-			}
-
-		header
-		{
-		}
-
-			header > p
-			{
-				display: block;
-				font-style: italic;
-			}
-
-			header.major
-			{
-				position: relative;
-				text-align: center;
-				border-top: solid 1px #ccc;
-				top: 1em;
-			}
-
-				header.major h2
-				{
-					background: #fff;
-					position: relative;
-					top: -0.65em;
-					display: inline;
-					margin: 0;
-					padding: 0 1em 0 1em;
-					
-				}
 
 	/* Box */
 
@@ -306,320 +265,7 @@
 				width: auto;
 			}
 
-	/* Button */
-		
-		input[type="button"],
-		input[type="submit"],
-		input[type="reset"],
-		.button
-		{
-			-webkit-appearance: none;
-			display: inline-block;
-			text-decoration: none;
-			cursor: pointer;
-			border: 0;
-			border-radius: 5px;
-			background: #d52349;
-			color: #fff !important;
-			font-weight: 700;
-			outline: 0;
-			-moz-transition: background-color .25s ease-in-out;
-			-webkit-transition: background-color .25s ease-in-out;
-			-o-transition: background-color .25s ease-in-out;
-			-ms-transition: background-color .25s ease-in-out;
-			transition: background-color .25s ease-in-out;
-		}
 
-			input[type="button"]:hover,
-			input[type="submit"]:hover,
-			input[type="reset"]:hover,
-			.button:hover
-			{
-				background: #e53359;
-			}
-			
-			input[type="button"]:active,
-			input[type="submit"]:active,
-			input[type="reset"]:active,
-			.button:active
-			{
-				background: #c51349;
-			}
-		
-			input[type="button"].alt,
-			input[type="submit"].alt,
-			input[type="reset"].alt,
-			.button.alt
-			{
-				background: #252122;
-			}
-
-				input[type="button"].alt:hover,
-				input[type="submit"].alt:hover,
-				input[type="reset"].alt:hover,
-				.button.alt:hover
-				{
-					background: #353132;
-				}
-				
-				input[type="button"].alt:active,
-				input[type="submit"].alt:active,
-				input[type="reset"].alt:active,
-				.button.alt:active
-				{
-					background: #151112;
-				}
-		
-			.button.icon
-			{
-			}
-			
-				.button.icon:before
-				{
-					opacity: 0.35;
-					position: relative;
-					top: 0.05em;
-					margin-right: 0.75em;
-				}
-
-	/* Image */
-
-		.image
-		{
-			display: inline-block;
-			outline: 0;
-		}
-		
-			.image img
-			{
-				display: block;
-				width: 100%;
-			}
-
-			.image.centered
-			{
-				display: block;
-				margin: 0 0 2em 0;
-			}
-
-				.image.centered img
-				{
-					margin: 0 auto;
-					width: auto;
-				}
-
-			.image.featured
-			{
-				display: block;
-				width: 100%;
-				margin: 0 0 2em 0;
-			}
-			
-			.image.left
-			{
-				float: left;
-				margin: 0 2em 2em 0;
-			}
-
-	/* List */
-
-		ul
-		{
-		}
-
-			ul.default
-			{
-				list-style: disc;
-				padding-left: 1em;
-			}
-			
-				ul.default li
-				{
-					padding-left: 0.5em;
-				}
-				
-			ul.contact
-			{
-			}
-
-				ul.contact li
-				{
-					position: relative;
-					border-top: solid 1px #ddd;
-					padding: 1.3em 0 1.3em 7em;
-				}
-
-					ul.contact li h3
-					{
-						position: absolute;
-						left: 0;
-						top: 1.3em;
-						font-size: 1.1em;
-					}
-
-					ul.contact li p
-					{
-						margin: 0;
-					}
-				
-				ul.contact li:first-child
-				{
-					padding-top: 0;
-					border-top: 0;
-				}
-
-					ul.contact li:first-child h3
-					{
-						top: 0;
-					}
-		
-			ul.dates
-			{
-			}
-			
-				ul.dates li
-				{
-					position: relative;
-					border-top: solid 1px #ddd;
-					padding: 1.3em 0 1.3em 6.75em;
-				}
-
-				ul.dates .date
-				{
-					display: block;
-					position: absolute;
-					left: 0;
-					top: 1.3em;
-					background-color: #d52349;
-					height: 3.5em;
-					text-align: center;
-					color: #fff;
-					line-height: 1em;
-					border-top-left-radius: 5px;
-					border-bottom-left-radius: 5px;
-					padding: 0.5em 0.75em 0 1em;
-				}
-
-					ul.dates .date:after
-					{
-						content: '';
-						position: absolute;
-						bottom: 0;
-						right: -1.2em;
-						border-left: solid 1.25em #d52349;
-						border-top: solid 1.8em transparent;
-						border-bottom: solid 1.8em transparent;
-					}
-				
-					ul.dates .date strong
-					{
-						display: block;
-						font-size: 1.75em;
-						padding-top: 0.15em;
-					}
-					
-				ul.dates h3
-				{
-					font-size: 1.1em;
-				}
-					
-				ul.dates p
-				{
-					margin: 0;
-				}
-
-				ul.dates li:first-child
-				{
-					border-top: 0;
-					padding-top: 0;
-				}
-				
-					ul.dates li:first-child .date
-					{
-						top: 0;
-					}
-
-			ul.divided
-			{
-			}
-			
-				ul.divided li
-				{
-					border-top: solid 1px #ddd;
-					padding: 1em 0 1em 0;
-				}
-				
-				ul.divided li:first-child
-				{
-					border-top: 0;
-					padding-top: 0;
-				}
-			
-			ul.social
-			{
-				overflow: hidden;
-				cursor: default;
-			}
-
-				ul.social li
-				{
-					display: inline-block;
-				}
-
-				ul.social li:first-child
-				{
-					margin-left: 0;
-				}
-
-				ul.social li a
-				{
-					display: inline-block;
-					width: 3em;
-					height: 3em;
-					text-align: center;
-					border-radius: 5px;
-					background: #888;
-					-moz-transition: background-color .25s ease-in-out;
-					-webkit-transition: background-color .25s ease-in-out;
-					-o-transition: background-color .25s ease-in-out;
-					-ms-transition: background-color .25s ease-in-out;
-					transition: background-color .25s ease-in-out;
-				}
-				
-					ul.social li a:before
-					{
-						color: #fff;
-						font-size: 2em;
-						line-height: 1.5em;
-					}
-				
-				ul.social li a.fa-facebook			{ background: #3c5a98; }
-				ul.social li a.fa-facebook:hover	{ background: #4c6aa8; }
-				ul.social li a.fa-twitter			{ background: #2daae4; }
-				ul.social li a.fa-twitter:hover		{ background: #3dbaf4; }
-				ul.social li a.fa-dribbble			{ background: #c4376b; }
-				ul.social li a.fa-dribbble:hover	{ background: #d4477b; }
-				ul.social li a.fa-linkedin			{ background: #006599; }
-				ul.social li a.fa-linkedin:hover	{ background: #1075a9; }
-				ul.social li a.fa-tumblr			{ background: #2b4661; }
-				ul.social li a.fa-tumblr:hover		{ background: #3b5671; }
-				ul.social li a.fa-google-plus		{ background: #da2713; }
-				ul.social li a.fa-google-plus:hover	{ background: #ea3723; }
-
-		ol
-		{
-		}	
-
-			ol.default
-			{
-				list-style: decimal;
-				padding-left: 1.25em;
-			}
-
-				ol.default li
-				{
-					padding-left: 0.25em;
-				}
 
 /*********************************************************************************/
 /* Icons                                                                         */
@@ -767,18 +413,7 @@
 				background: #f7f7f7 url('images/bg02.png');
 			}
 	
-	.logo_container {
-	    width: 500px;
-	    height: 355px;
-	    background: #aaa;
-	    text-align: center;
-	    line-height: 300px;
-	}
-
-	.logo_container img {
-    	margin-top: 10px;
-    	vertical-align: middle;
-	}
+	
 
 		
 	#footer-wrapper
@@ -852,24 +487,7 @@
 	{
 		text-align: center;
 	}
-	
-/*********************************************************************************/
-/* Copyright                                                                     */
-/*********************************************************************************/
-
-	#copyright
-	{	
-		text-align: center;
-	}
-	
-		#copyright .links
-		{
-			display: inline-block;
-			background: #2C2929;
-			background: rgba(255,255,255,0.05);
-			border-radius: 5px;
-			margin: 0;
-		}
+		
 =======
 body {
     text-align: center;
@@ -922,4 +540,4 @@ body {
     border-radius: 10px;
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
 }
->>>>>>> 70cea538e643d1abadd20e3fb1fd75b8c636d91d
+
