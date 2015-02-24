@@ -9,7 +9,6 @@
 		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
 	</head>
 	<body>
-		<canvas id="text" width="600" height="200"></canvas>
 		<canvas id="stage" width="500" height="100"></canvas>
 		<form id="form">
 		</form>
@@ -17,7 +16,7 @@
 	(function(){
     var stage, textStage, form, input;
     var circles, textPixels, textFormed;
-    var offsetX, offsetY, text;
+    var offsetX, offsetY;
     var colors = ['#B2949D', '#FFF578', '#FF5F8D', '#37A9CC', '#188EB2'];
 
     function init() {
@@ -31,9 +30,6 @@
     function initStages() {
         offsetX = (window.innerWidth-600)/2;
         offsetY = (window.innerHeight-300)/2;
-        textStage = new createjs.Stage("text");
-        textStage.canvas.width = 600;
-        textStage.canvas.height = 200;
 
         stage = new createjs.Stage("stage");
         stage.canvas.width = window.innerWidth;
@@ -45,12 +41,6 @@
         form.style.top = offsetY+200+'px';
         form.style.left = offsetX+'px';
         input = document.getElementById('inputText');
-    }
-
-    function initText() {
-        text = new createjs.Text("t", "80px 'Source Sans Pro'", "#eee");
-        text.textAlign = 'center';
-        text.x = 300;
     }
 
     function initCircles() {
