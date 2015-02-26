@@ -1,18 +1,30 @@
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<script src="http://code.createjs.com/easeljs-0.7.0.min.js"></script>
-		<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenLite.min.js"></script>
-		<title>Song Karaoke Sample Page</title>
-		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<meta name="keywords" content="" />
-		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
-	</head>
-	<body>
-		<canvas id="text" width="600" height="200"></canvas>
-		<canvas id="stage" width="500" height="100"></canvas>
-		<form id="form">
-		</form>
+<head>
+<script src="http://code.createjs.com/easeljs-0.7.0.min.js"></script>
+<script
+	src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenLite.min.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/textarea-helper.js"></script>
+<script src="js/web-speech-test.js"></script>
+<title>Song Karaoke Sample Page</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+</head>
+<body>
+	<canvas id="text" width="600" height="200"></canvas>
+	<canvas id="stage" width="500" height="100"></canvas>
+	<form id="form">
+<!-- 		<div id="main">																-->
+<!--			<div id="content">														-->
+<!--				<input type="button" id="enable-speech" value="Enable Speech" />	-->
+<!--				<input type="button" id="disable-speech" value="Disable Speech" />	-->
+<!--				<br> <br>															-->
+<!--				<textarea id="speech-page-content" name="pageContent"></textarea>	-->
+<!--			</div>																	-->
+<!--		</div>																		-->
+	</form>
 	<script>
 	(function(){
     var stage, textStage, form, input;
@@ -109,5 +121,5 @@
     window.onload = function() { init() };
 })();
 	</script>
-	</body>
+</body>
 </html>
