@@ -4,52 +4,50 @@
 
 		try {
 			var recognition = new webkitSpeechRecognition();
-		} catch(e) {
+		} catch(e) 
+		{
 			var recognition = Object;
 		}
 		recognition.continuous = true;
-		recognition.interimResults = false;
-		recognition.lang = 'en';
+		recognition.interimResults = true;
 
+		var finalText = '';
 		var interimResult = '';
 		var textArea = $('#speech-page-content');
 		var textAreaID = 'speech-page-content';
-		var confidenceThresh = 0.5;
 
-		// function called when enable is pressed
-		$("#enable-speech").click(function(){
+		$("#enable-speech").click(function()
+				{
 			startRecognition();
-		});
+				});
 
-		var startRecognition = function() {
+		var startRecognition = function() 
+		{
 			textArea.focus();
 			recognition.start();
 		};
 
-		// function that checks existence of s in str
-		var userSaid = function(str, s) {
-			return str.indexOf(s) > -1;
-		}
+		$("#disable-speech").click(function()
+				{
+			recognition.stop();
+				});
 
 		recognition.onresult = function (event) 
 		{
-			var text;
-			for (var i = event.resultIndex; i < event.results.length; ++i) 
-			{
+			var pos = textArea.getCursorPosition() - interimResult.length;
+			textArea.val(textArea.val().replace(interimResult, ''));
+			interimResult = '';
+			textArea.setCursorPosition(pos);
+			for (var i = event.resultIndex; i < event.results.length; ++i) {
 				if (event.results[i].isFinal) 
 				{
-					if (parseFloat(event.results[i][0].confidence) >= parseFloat(confidenceThresh))
-					{
-						text = event.results[i][0].transcript;
-						insertAtCaret(textAreaID, event.results[i][0].transcript);
-
-						// test to see if word recognizer works
-						if (userSaid(text, 'ad'))
-						{
-							console.log('add')
-						}
-
-					}
+					finalText += event.results[i][0].transcript;
+					insertAtCaret(textAreaID, event.results[i][0].transcript);
+				} else 
+				{
+					isFinished = false;
+					insertAtCaret(textAreaID, event.results[i][0].transcript + '\u200B');
+					interimResult += event.results[i][0].transcript + '\u200B';
 				}
 			}
 		};
