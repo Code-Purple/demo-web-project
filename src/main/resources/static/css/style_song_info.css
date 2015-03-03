@@ -1,12 +1,6 @@
 @import url(font-awesome.min.css);
 @import url("http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic");
 
-/*
-	Strata by HTML5 UP
-	html5up.net | @n33co
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-*/
-
 /* Basic */
 
 	body {
@@ -14,8 +8,7 @@
 	}
 
 		body.is-loading *, body.is-loading *:before, body.is-loading *:after {
-			-moz-animation: none !important;
-			-webkit-animation: none !important;
+			-moz-animation: none !important;			-webkit-animation: none !important;
 			-o-animation: none !important;
 			-ms-animation: none !important;
 			animation: none !important;
@@ -391,14 +384,17 @@
 	}
 
 /* Header */
+    .header {
+        height:90vh;    
+    }
 
 	#header {
 		background-color: #1f1815;
-		background-attachment: scroll,								fixed;
-		background-image: url("images/overlay.png"), url("../images/bg.jpg");
-		/*background-position: top left,							top left;*/
-		background-repeat: repeat,								no-repeat;
-		background-size: auto,								auto 100%;
+		background-attachment: scroll, fixed;
+		background-image: url("../images/bg-pharrell.jpg");
+		/*background-position: top left	top left;*/
+		background-repeat: no-repeat, no-repeat;
+		background-size: auto 100%, auto 100%;
 		color: rgba(255, 255, 255, 0.5);
 		height: 100%;
 		left: 0;
@@ -418,7 +414,7 @@
 		}
 
 		#header h1 {
-			color: rgba(255, 255, 255, 0.5);
+			color: rgba(206, 206, 20, 0.8);
 			font-size: 1.35em;
 			line-height: 1.75em;
 			margin: 0;
