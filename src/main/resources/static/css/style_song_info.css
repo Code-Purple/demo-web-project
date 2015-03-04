@@ -387,8 +387,7 @@
     .header {
         height:90vh;    
     }
-
-	#header {
+	.happy {
 		background-color: #1f1815;
 		background-attachment: scroll, fixed;
 		background-image: url("../images/bg-pharrell.jpg");
@@ -404,7 +403,86 @@
 		top: 0;
 		width: 100%;
 	}
-
+	.living_on_a_prayer {
+		background-color: #1f1815;
+		background-attachment: scroll, fixed;
+		background-image: url("../images/bg-pharrell.jpg");
+		/*background-position: top left	top left;*/
+		background-repeat: no-repeat, no-repeat;
+		background-size: auto 100%, auto 100%;
+		color: rgba(255, 255, 255, 0.5);
+		height: 100%;
+		left: 0;
+		padding: 8em 4em 0 4em;
+		position: fixed;
+		text-align: middle;
+		top: 0;
+		width: 100%;
+	}
+	.dream_a_little_dream_of_me {
+		background-color: #1f1815;
+		background-attachment: scroll, fixed;
+		background-image: url("../images/bg-pharrell.jpg");
+		/*background-position: top left	top left;*/
+		background-repeat: no-repeat, no-repeat;
+		background-size: auto 100%, auto 100%;
+		color: rgba(255, 255, 255, 0.5);
+		height: 100%;
+		left: 0;
+		padding: 8em 4em 0 4em;
+		position: fixed;
+		text-align: middle;
+		top: 0;
+		width: 100%;
+	}
+	.all_about_that_bass {
+		background-color: #1f1815;
+		background-attachment: scroll, fixed;
+		background-image: url("../images/bg-pharrell.jpg");
+		/*background-position: top left	top left;*/
+		background-repeat: no-repeat, no-repeat;
+		background-size: auto 100%, auto 100%;
+		color: rgba(255, 255, 255, 0.5);
+		height: 100%;
+		left: 0;
+		padding: 8em 4em 0 4em;
+		position: fixed;
+		text-align: middle;
+		top: 0;
+		width: 100%;
+	}
+	.shake_it_off {
+		background-color: #1f1815;
+		background-attachment: scroll, fixed;
+		background-image: url("../images/bg-pharrell.jpg");
+		/*background-position: top left	top left;*/
+		background-repeat: no-repeat, no-repeat;
+		background-size: auto 100%, auto 100%;
+		color: rgba(255, 255, 255, 0.5);
+		height: 100%;
+		left: 0;
+		padding: 8em 4em 0 4em;
+		position: fixed;
+		text-align: middle;
+		top: 0;
+		width: 100%;
+	}
+	.sweet_child_of_mine {
+		background-color: #1f1815;
+		background-attachment: scroll, fixed;
+		background-image: url("../images/bg-pharrell.jpg");
+		/*background-position: top left	top left;*/
+		background-repeat: no-repeat, no-repeat;
+		background-size: auto 100%, auto 100%;
+		color: rgba(255, 255, 255, 0.5);
+		height: 100%;
+		left: 0;
+		padding: 8em 4em 0 4em;
+		position: fixed;
+		text-align: middle;
+		top: 0;
+		width: 100%;
+	}
 		#header strong, #header b {
 			color: #ffffff;
 		}
