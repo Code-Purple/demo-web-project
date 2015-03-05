@@ -406,10 +406,10 @@
 	.living_on_a_prayer {
 		background-color: #1f1815;
 		background-attachment: scroll, fixed;
-		background-image: url("../images/bg-pharrell.jpg");
+		background-image: url("../images/bg-jovi.jpg");
 		/*background-position: top left	top left;*/
 		background-repeat: no-repeat, no-repeat;
-		background-size: auto 100%, auto 100%;
+		background-size: 100%;
 		color: rgba(255, 255, 255, 0.5);
 		height: 100%;
 		left: 0;
@@ -422,10 +422,10 @@
 	.dream_a_little_dream_of_me {
 		background-color: #1f1815;
 		background-attachment: scroll, fixed;
-		background-image: url("../images/bg-pharrell.jpg");
+		background-image: url("../images/bg-mamas.jpg");
 		/*background-position: top left	top left;*/
 		background-repeat: no-repeat, no-repeat;
-		background-size: auto 100%, auto 100%;
+		background-size: 100%;
 		color: rgba(255, 255, 255, 0.5);
 		height: 100%;
 		left: 0;
@@ -441,7 +441,7 @@
 		background-image: url("../images/bg-pharrell.jpg");
 		/*background-position: top left	top left;*/
 		background-repeat: no-repeat, no-repeat;
-		background-size: auto 100%, auto 100%;
+		background-size: 100%;
 		color: rgba(255, 255, 255, 0.5);
 		height: 100%;
 		left: 0;
@@ -451,13 +451,14 @@
 		top: 0;
 		width: 100%;
 	}
+
 	.shake_it_off {
 		background-color: #1f1815;
 		background-attachment: scroll, fixed;
 		background-image: url("../images/bg-pharrell.jpg");
 		/*background-position: top left	top left;*/
 		background-repeat: no-repeat, no-repeat;
-		background-size: auto 100%, auto 100%;
+		background-size: 100%;
 		color: rgba(255, 255, 255, 0.5);
 		height: 100%;
 		left: 0;
@@ -473,7 +474,7 @@
 		background-image: url("../images/bg-pharrell.jpg");
 		/*background-position: top left	top left;*/
 		background-repeat: no-repeat, no-repeat;
-		background-size: auto 100%, auto 100%;
+		background-size: 100%;
 		color: rgba(255, 255, 255, 0.5);
 		height: 100%;
 		left: 0;
