@@ -22,6 +22,7 @@ import edu.csupomona.cs480.GsonExample;
 import edu.csupomona.cs480.HTMLParser;
 import edu.csupomona.cs480.data.User;
 import edu.csupomona.cs480.data.provider.UserManager;
+import singleton.SayHello;
 
 import com.google.common.collect.Ordering;
 
@@ -157,11 +158,13 @@ public class WebController {
 
 	/********* Print hello **********
 	 * This method simply prints "hello"
+	 * Note: Modified to use a singleton class for assignment 9
 	 * Author: Marion Levy
 	 */
 	@RequestMapping(value = "/hello", method = RequestMethod.GET)
 	String sayHello() {
-		return "Hello";
+		SayHello hello = SayHello.getInstance();
+		return hello.getHello();
 	}
 	
 	/********* Sort 3 Numbers (Assignment 5) **********
