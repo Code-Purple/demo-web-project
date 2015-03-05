@@ -1,0 +1,194 @@
+@charset 'UTF-8';
+@import url("font-awesome.min.css");
+/*@import url("http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,900,300italic");*/
+@import url("http://fonts.googleapis.com/css?family=Jura:300,400");
+@import url(http://fonts.googleapis.com/css?family=Lemon);
+@import url(http://fonts.googleapis.com/css?family=Lobster+Two:400,400italic);
+
+/* CSS Document */
+
+body {
+}
+
+ol, ul {
+	list-style: none;
+}
+
+blockquote, q {
+	quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+video {
+    min-width:100%;
+    min-height:100%;
+    position:fixed;
+    width:auto;
+    height:auto;
+    bottom:0;
+    right:0;
+    z-index:-75;
+}
+
+#textblock {
+	width:200px;
+	height:auto;
+	background:rgba(0, 0, 0, 0.3);
+	margin-left:30px;
+	margin-top:30px;
+	border-radius:70px;
+	-moz-border-radius-topright: 5px;
+	-moz-border-radius-topleft: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-webkit-border-top-left-radius: 5px;
+	text-align:center;
+	color:#FFF;
+}
+
+h1 {
+    font-family: 'Jura';
+	font-size:1em;
+	font-weight:bolder;
+	text-align:left;
+    margin-left: 4em;
+	color:#fff;
+}
+
+h2 {
+    font-family: 'Lemon', cursive;
+    font-size: 7.5em;
+    color: #fff;
+	font-weight:bold;
+    text-align: center;
+    margin-top: 1.5em;
+    margin-left: -5em;
+}
+
+h3 {
+	font-size:18px;
+}
+
+h4 {
+    font-family: 'Jura';
+    font-size: 2.5em;
+    color: #fff;
+    text-align: center;
+    margin-left: -7em;
+
+}
+
+h5 {
+    font-family: 'Lobster Two', cursive;
+    margin-top: -1em;
+    margin-right: 2em;
+    font-size: 8em;
+    color: #fff;
+    text-align: center;
+}
+
+.logo {
+    border-radius: 100px;
+    width: 170px;
+    height: auto;
+	display:block;
+	margin: 0 auto;
+	padding-top:10px;
+	padding-bottom:10px;
+	
+}
+
+
+a {
+	color:red;
+}
+
+/***********************
+    --Search Bar--
+***********************/
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+input {
+    border: none;
+    line-height: 2.5em;
+    margin: 0;
+    outline: none;
+    padding: 0;
+    -webkit-appearance: none;
+}
+
+input[type="search"] {
+    -webkit-appearance: textfield;
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+}
+
+.clearfix { *zoom: 1; }
+.clearfix:before, .clearfix:after {
+    content: "";
+    display: table; 
+}
+.clearfix:after { clear: both; }
+
+.container {
+    font: 14px/1.5em "Open Sans", sans-serif;
+    height: 44px;
+    left: 50%;
+    margin: 10em 0 0 -15em;
+    position: absolute;
+    top: 50%;
+}
+
+#search {
+	background-color:rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+    display: inline-block;
+    padding: 7px;
+}
+
+#search input {
+    float: left;
+}
+
+#search input[type="search"],
+#search input[type="submit"] {
+    border-radius: 3px;
+    font-size: 12px;
+}
+
+#search input[type="search"] {
+    background: #fff;
+    min-width: 300px;
+    padding: 6px 8px;
+}
+
+#search input[type="submit"] {
+    background: #913685;
+    color: #fff;
+    font-weight: bold;
+    margin-left: 7px;
+    padding: 6px 10px;
+}
+
+#search input[type="submit"]:hover {
+    background: #DE68CE;
+}
+
+#search input[type="search"]::-webkit-input-placeholder { color: #42454e; }
+#search input[type="search"]:-moz-placeholder { color: #42454e; }
+#search input[type="search"]:-ms-input-placeholder { color: #42454e; }

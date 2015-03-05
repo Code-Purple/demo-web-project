@@ -1,106 +1,47 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
-<head>
-<title>Let's go karaokin'!</title>
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<meta name="Portable, simple karaoke" content="" />
-<meta name="keywords" content="" />
-<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
-<script src="js/jquery.min.js"></script>
-<script src="js/jquery.dropotron.min.js"></script>
-<script src="js/skel.min.js"></script>
-<script src="js/skel-layers.min.js"></script>
-<script src="js/init.js"></script>
-<script src="js/jquery.typeahead.js"></script>
-<noscript>
-	<link rel="stylesheet" href="css/skel.css" />
-	<link rel="stylesheet" href="css/style.css" />
-	<link rel="stylesheet" href="css/style-desktop.css" />
-</noscript>
-<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
-</head>
-<body class="homepage">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title> Let's go Karaokin'!</title>
+        <meta name="Portable, simple karaoke" content="" />
+        <link rel="stylesheet" href="css/styles.css" />
 
-	<!-- Header -->
-	<div id="header-wrapper">
-		<div id="header">
+    </head>
 
-			<!-- Logo -->
+    <body>
+        <div id="bg_video">
+            <video autoplay="autoplay" loop="loop">
+                <source src="video/karaoke-video-bg.mp4" type="video/mp4" />
+                <source src="video/karaoke-video-bg.ogv" type="video/ogg" />
+                <source src="video/karaoke-video-bg.webm" type="video/webm" />
+            </video>
+        </div> 
 
-			<div id="logo_container">
-				<image src="images/logo-wave-large-text.png" height="300"
-					width="auto" alt="" />
-			</div>
+        <div id="textblock">
+            <img src="images/logo-wave-large-text.png" alt="karaokin logo" class="logo" />
+        </div>
+        <h1> Portable. Easy. Fun!</h1> 
 
-			<header>
-				<h10>Portable. Easy. Fun!</h10>
-			</header>
-			<form>
-				<p>Get started now, enter a song!</p>
-				<div id="test">
-					<form id="form-search" name="form-search" action="">
-						<div class="typeahead-container">
-							<div class="typeahead-field">
+        <div style="clear: both">
+            <h2 > Hello, </h2>
+            <h5 > crooner...</h5>
+        </div>
 
-								<span class="typeahead-query"> <input
-									id="search-query" name="search" type="search"
-									placeholder="Search" autocomplete="off">
-								</span> <span class="typeahead-button">
-									<button id="search-button" type="submit" >
-										<i class="search-icon"></i>
-									</button>
-								</span>
-							</div>
-						</div>
-					</form>
-					<script>
-
-					$('#search-query').typeahead({
-						minLength: 1,
-					    order: "asc",
-					    source: {
-					        data: [
-					            "dream a little dream of me", "the mamas and the papas",
-					            "sweet child of mine", "guns n roses",
-					            "meghan trainor", "all about that bass",
-					            "bon jovi", "living on a prayer",
-					            "pharrell williams", "happy",
-					            "taylor swift", "shake it off"
-					            
-					        ]
-					    },
-					    callback: {
-					        onInit: function (node) {
-					            console.log('Typeahead Initiated on ' + node.selector);
-					        }
-					    }
-					});
-
-    			</script>
-				</div>
-			</form>
-		</div>
-<!-- Intro -->
-        <section id="intro" class="container">
-            <div class="row">
-                <div class="6u">
-                    <section class="middle">
-                        <i class="icon featured fa-cog"></i>
-                        <header>
-                            <h2>Enter Your Party ID!</h2>
-                        </header>
-                        <p>Join the party, enter your party's ID here!</p>
-                    </section>
-                </div>
-                <div class="6u">
-                    <section class="last">
-                        <i class="icon featured alt fa-flash"></i>
-                        <header>
-                            <h2>Sign in</h2>
-                        </header>
-                        <p>Find your friends, see your scores, add your favorite songs to your wish list</p>
-                    </section>
-                </div>
-            </div>
-        </section>
-</body>
+        <div class="container">
+        <h4> Let's get the karaoke party started, enter a song now!</h4> 
+            <div id="search">
+                <form action="javascript:void(0);" method="GET">
+                    <fieldset class="clearfix">
+                        <input type="search" name="search" value="Enter a song!" 
+                            onBlur="if(this.value=='')
+                                this.value='Enter a song!'" 
+                            onFocus="if(this.value=='Enter a song!')
+                                this.value='' "> 
+                        <input type="submit" value="Search" class="button">
+                    </fieldset>
+                </form>
+            </div> <!-- end search -->
+        </div> <!-- end container -->
+    
+    </body>
+</html>
