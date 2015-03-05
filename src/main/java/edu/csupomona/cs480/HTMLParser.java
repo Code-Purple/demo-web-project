@@ -8,12 +8,43 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-public class ParseHtml 
+public class HTMLParser
 {
-	public String ParseURL(String query) 
+	String parsedText;
+	private final String query;
+	
+	public static class HTMLParserBuilder 
+	{	
+		private String query;
+
+		// constructor
+		public HTMLParserBuilder()
+		{
+
+		}
+
+		public HTMLParserBuilder setQuery(final String query)
+		{
+			this.query = query;
+			return this;
+		}
+
+		public HTMLParser createParser()
+		{
+			return new HTMLParser(query);
+		}
+	}
+
+	// private constructor for builder
+	private HTMLParser(final String query) 
+	{
+		this.query = query;
+	}
+
+	public void ParseURL() 
 	{
 		Document doc;
-		String returnText = "***TOP GOOGLE SEARCH RESULTS FOR QUERY***<br><br>";
+		parsedText += "***TOP GOOGLE SEARCH RESULTS FOR QUERY***<br><br>";
 
 		try 
 		{
@@ -28,15 +59,17 @@ public class ParseHtml
 					text = text.replace("<a href=\"/url?q=", "");
 					text = text.replaceAll("(&amp;sa=U&amp;ei=).*", "");
 
-					returnText += text + "<br>";
+					parsedText += text + "<br>";
 				}
 			}
 		} catch (IOException e) 
 		{
-			return "Error";
 		}
-
-		return returnText;
+	}
+	
+	public String toString()
+	{
+		return parsedText;
 	}
 
 }

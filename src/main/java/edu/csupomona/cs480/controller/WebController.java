@@ -5,18 +5,21 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Date;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import edu.csupomona.cs480.App;
 import edu.csupomona.cs480.GsonExample;
-import edu.csupomona.cs480.ParseHtml;
+import edu.csupomona.cs480.HTMLParser;
 import edu.csupomona.cs480.data.User;
 import edu.csupomona.cs480.data.provider.UserManager;
 
@@ -183,8 +186,11 @@ public class WebController {
 	String parseForUrls(
 			@RequestParam("query") String query
 			) {
-		ParseHtml p = new ParseHtml();
-		return p.ParseURL(query);
+		HTMLParser p = new HTMLParser.HTMLParserBuilder()
+											.setQuery(query)
+											.createParser();
+		p.ParseURL();
+		return p.toString();
 	}
 	
 	/*********Assignemnt 3: Addition **********
@@ -231,4 +237,10 @@ public class WebController {
 		SimpleDateFormat f = new SimpleDateFormat("hh:mm:ss a");
 		return f.format(d);
 	}
+	
+	/*@RequestMapping(value = "/index.html", method = RequestMethod.GET, params="search")
+	public @ResponseBody void byParameter(@RequestParam("search") String search) 
+	{
+		System.out.println(search);
+	}*/
 }
