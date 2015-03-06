@@ -5,7 +5,8 @@
         <title> Let's go Karaokin'!</title>
         <meta name="Portable, simple karaoke" content="" />
         <link rel="stylesheet" href="css/styles.css" />
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.4/dist/typeahead.jquery.js"></script>
     </head>
 
     <body>
@@ -16,32 +17,65 @@
                 <source src="video/karaoke-video-bg.webm" type="video/webm" />
             </video>
         </div> 
-
-        <div id="textblock">
-            <img src="images/logo-wave-large-text.png" alt="karaokin logo" class="logo" />
-        </div>
-        <h1> Portable. Easy. Fun!</h1> 
+        <div id="logo_block">
+            <div id="textblock">
+                <img src="images/logo-wave-large-text.png" alt="karaokin logo" class="logo" />
+            </div>
+            <h1> Portable. Easy. Fun!</h1> 
+        </dev>
 
         <div style="clear: both">
             <h2 > Hello, </h2>
-            <h5 > crooner...</h5>
+            <h5 > Rockstar...</h5>
         </div>
 
         <div class="container">
-        <h4> Let's get the karaoke party started, enter a song now!</h4> 
+            <h4> Let's get the karaoke party started, enter a song now!</h4> 
             <div id="search">
-                <form action="javascript:void(0);" method="GET" >
-                    <fieldset class="clearfix">
-                        <input type="search" name="search" value="Enter a song!" 
-                            onBlur="if(this.value=='')
-                                this.value='Enter a song!'" 
-                            onFocus="if(this.value=='Enter a song!')
-                                this.value='' "> 
-                        <input type="submit" value="Search" class="button">
-                    </fieldset>
-                </form>
-            </div> <!-- end search -->
-        </div> <!-- end container -->
+                <input class='songTA' type="text" placeholder="Enter a song title or artist">
+            </div> 
+        </div>
     
     </body>
+    <script>
+        var substringMatcher = function(strs) {
+          return function findMatches(q, cb) {
+            var matches, substrRegex;
+         
+            // an array that will be populated with substring matches
+            matches = [];
+         
+            // regex used to determine if a string contains the substring `q`
+            substrRegex = new RegExp(q, 'i');
+         
+            // iterate through the pool of strings and for any string that
+            // contains the substring `q`, add it to the `matches` array
+            $.each(strs, function(i, str) {
+              if (substrRegex.test(str)) {
+                // the typeahead jQuery plugin expects suggestions to a
+                // JavaScript object, refer to typeahead docs for more info
+                matches.push({ value: str });
+              }
+            });
+         
+            cb(matches);
+          };
+        };
+         
+        var states = ['Dream a Little Dream of Me', 'Sweet Child O\' Mine', 'Happy', 'Shake it Off', 
+                      'Livin\' on a Prayer', 'All About That Bass', 'Meghan Trainor', 'Bon Jovi', 
+                      'Pharell Williams', 'Mamas and the Papas', 'Guns N\' Roses', 'Taylor Swift'
+        ];
+         
+        $('#search .songTA').typeahead({
+          hint: true,
+          highlight: true,
+          minLength: 1
+        },
+        {
+          name: 'states',
+          displayKey: 'value',
+          source: substringMatcher(states)
+        });
+    </script>
 </html>
