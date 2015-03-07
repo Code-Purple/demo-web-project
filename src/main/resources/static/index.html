@@ -11,37 +11,33 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.4/dist/typeahead.jquery.js"></script>
 </head>
 
-<body>
-	<div id="bg_video">
-		<video autoplay="autoplay" loop="loop">
-			<source src="video/karaoke-video-bg.mp4" type="video/mp4" />
-			<source src="video/karaoke-video-bg.ogv" type="video/ogg" />
-			<source src="video/karaoke-video-bg.webm" type="video/webm" />
-		</video>
-	</div>
-	<div id="logo_block">
-		<div id="textblock">
-			<img src="images/logo-wave-large-text.png" alt="karaokin logo"
-				class="logo" />
-		</div>
-		<h1>Portable. Easy. Fun!</h1>
-		</dev>
-
-		<div style="clear: both">
-			<h2>Hello,</h2>
-			<h5>Rockstar...</h5>
-		</div>
-
-		<div class="container">
-			<h4>Let's get the karaoke party started, enter a song now!</h4>
-			<div id="search">
-				<input id="searchbox" class='songTA' type="text"
-					placeholder="Enter a song title or artist"
-					onkeypress="LoadPage(event)">
-			</div>
-		</div>
-</body>
-<script>
+    <body>
+        <div id="bg_video">
+            <video autoplay="autoplay" loop="loop">
+                <source src="video/karaoke-video-bg.mp4" type="video/mp4" />
+                <source src="video/karaoke-video-bg.ogv" type="video/ogg" />
+                <source src="video/karaoke-video-bg.webm" type="video/webm" />
+            </video>
+        </div>
+        <div id="menu-bar">
+            <img src="images/logo-wave-large-text.png" alt="karaokin logo" class="logo" />
+            <div id="menu-items">
+            <h1> Portable. Easy. Fun!</h1> 
+                <ul>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="about.html">Login/Sign Up</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="search-container"> 
+            <h4> Let's get the karaoke party started, enter a song now!</h4> 
+            <div id="search">
+              <input id="searchbox" class="songTA" type="text" placeholder="Enter a song title or artist name" onkeypress="LoadPage(event)">
+            </div>
+        </div>
+    </body>
+    
+    <script>
         var substringMatcher = function(strs) {
           return function findMatches(q, cb) {
             var matches, substrRegex;
@@ -65,7 +61,7 @@
             cb(matches);
           };
         };
-         
+ 
         var states = ['Dream a Little Dream of Me', 'Sweet Child O\' Mine', 'Happy', 'Shake it Off', 
                       'Livin\' on a Prayer', 'All About That Bass', 'Meghan Trainor', 'Bon Jovi', 
                       'Pharell Williams', 'Mamas and the Papas', 'Guns N\' Roses', 'Taylor Swift'
