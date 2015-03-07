@@ -1,5 +1,6 @@
 @charset 'UTF-8';
 @import url("font-awesome.min.css");
+@import url(http://fonts.googleapis.com/css?family=Headland+One);
 /*@import url("http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,900,300italic");*/
 @import url("http://fonts.googleapis.com/css?family=Jura:300,400");
 @import url(http://fonts.googleapis.com/css?family=Lemon);
@@ -62,6 +63,10 @@ ol, ul {
 	list-style: none;
 }
 
+li {
+    float: right;
+}
+
 blockquote, q {
 	quotes: none;
 }
@@ -94,13 +99,70 @@ video {
 	color:#FFF;
 }
 
+#menu-bar {
+    background-color: rgba(0, 0, 0, 0.7);
+    overflow: visible;
+}
+
+#menu-items {
+    overflow: auto;
+}
+/*
+#typeahead {
+    position: relative;
+    display: inline-block;
+    direction: ltr;
+}
+
+#typeahead.tt-hint {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    border-color: transparent;
+    box-shadow: none;
+    opacity: 1;
+    background: none 0% 0% / auto repeat scroll padding-box border-box rgb(255, 255, 255);
+}
+
+#typeahead.tt-input {
+    position: relative;
+    vertical-align: top;
+    background-color: transparent;
+}
+
+pre {
+    position: absolute;
+    visibility: hidden;
+    white-space: pre;
+    font-family: 'Headland One', serif;
+    font-size: 24px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    word-spacing: 0px;
+    letter-spacing: 0px;
+ /*   text-indent: 0px;
+    text-rendering: auto;
+    text-transform: none;
+}
+
+#tt-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0px;
+    z-index: 100;
+    display: none;
+    right: auto;
+}
+*/
 h1 {
+    float: left;
     font-family: 'Jura';
 	font-size:1em;
 	font-weight:bolder;
 	text-align:left;
-    margin-left: 4em;
-	color:#fff;
+	margin: 2.5em 0 0 2em;;
+    color:#fff;
 }
 
 h2 {
@@ -119,11 +181,9 @@ h3 {
 
 h4 {
     font-family: 'Jura';
-    font-size: 2.5em;
+    font-size: 3.5em;
     color: #fff;
     text-align: center;
-    margin-left: -7em;
-
 }
 
 h5 {
@@ -136,13 +196,11 @@ h5 {
 }
 
 .logo {
-    border-radius: 100px;
-    width: 170px;
+    border-radius: 4em;
+    float: left;
+    width: 10em;
     height: auto;
 	display:block;
-	margin: 0 auto;
-	padding-top:10px;
-	padding-bottom:10px;
 	
 }
 
@@ -154,40 +212,20 @@ a {
 /***********************
     --Search Bar--
 ***********************/
-
-fieldset {
-    border: 0;
-    margin: 0;
-    padding: 0;
+#search-container {
+    margin: 35em 0 0 0;
+    text-align:center;
 }
 
 input {
     border: none;
     line-height: 2.5em;
-    margin: 0;
+    margin: 1em;
+    width: 40em;
     outline: none;
-    padding: 0;
+    padding: 1em;
     -webkit-appearance: none;
 }
-
-input[type="search"] {
-    -webkit-appearance: textfield;
-    -moz-box-sizing: content-box;
-    -webkit-box-sizing: content-box;
-    box-sizing: content-box;
-}
-
-input[type="search"]::-webkit-search-cancel-button,
-input[type="search"]::-webkit-search-decoration {
-    -webkit-appearance: none;
-}
-
-.clearfix { *zoom: 1; }
-.clearfix:before, .clearfix:after {
-    content: "";
-    display: table; 
-}
-.clearfix:after { clear: both; }
 
 .container {
     font: 14px/1.5em "Open Sans", sans-serif;
@@ -198,41 +236,18 @@ input[type="search"]::-webkit-search-decoration {
     top: 50%;
 }
 
+/* text color in #search changes text color in the drop down menu */
 #search {
+    color: #fff;
 	background-color:rgba(0, 0, 0, 0.3);
     border-radius: 3px;
+    margin-top: 2em;
     display: inline-block;
     padding: 7px;
 }
 
+/*changing text color here adjusts the input text color */
 #search input {
+    color: #45133E;
     float: left;
 }
-
-#search input[type="search"],
-#search input[type="submit"] {
-    border-radius: 3px;
-    font-size: 12px;
-}
-
-#search input[type="search"] {
-    background: #fff;
-    min-width: 300px;
-    padding: 6px 8px;
-}
-
-#search input[type="submit"] {
-    background: #913685;
-    color: #fff;
-    font-weight: bold;
-    margin-left: 7px;
-    padding: 6px 10px;
-}
-
-#search input[type="submit"]:hover {
-    background: #DE68CE;
-}
-
-#search input[type="search"]::-webkit-input-placeholder { color: #42454e; }
-#search input[type="search"]:-moz-placeholder { color: #42454e; }
-#search input[type="search"]:-ms-input-placeholder { color: #42454e; }
