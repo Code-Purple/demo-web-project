@@ -45,5 +45,4 @@ body {
      transform: translate3d( (random(1000) * 1px),  (random(1000) * 1px), (random(2000) * 1px));
      background: hsl( random(360) , 70%, 50%);
   }
- 
 }
