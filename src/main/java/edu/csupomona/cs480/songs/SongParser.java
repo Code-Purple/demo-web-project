@@ -63,6 +63,7 @@ public class SongParser {
 				}else{
 					//CONTENT
 					SongNote note = new SongNote();
+					note.text = "";
 					SongNoteType type;
 					if(charArr[0] == ':')
 						type = SongNoteType.Regular;
@@ -75,7 +76,7 @@ public class SongParser {
 					else
 						type = SongNoteType.Regular; //shouldn't happen
 					
-					note.songTypeID = type.ordinal();
+					note.noteTypeID = type.ordinal();
 					note.sequenceNum = seq++;
 					
 					if(type != SongNoteType.LineBreak){
@@ -83,7 +84,7 @@ public class SongParser {
 						int spaceCount = 0;
 						
 						for(int i = 1; i < components.length; ++i){
-							if(components[i] == ""){
+							if(components[i].equals("") || components[i].equals(" ")){
 								spaceCount += 1;
 							}else{
 								colNumber += 1;
@@ -94,8 +95,7 @@ public class SongParser {
 									note.duration = Integer.parseInt(components[i]);
 								}else if(colNumber == 3){
 									note.pitch = Integer.parseInt(components[i]);
-								}else if(colNumber == 4){
-									note.text = "";
+								}else if(colNumber >= 4){
 									
 									for(int j = 0; j < spaceCount; ++j)
 										note.text += " ";
@@ -106,9 +106,13 @@ public class SongParser {
 								spaceCount = 0;
 							}
 						}
+						
+						for(int i = 0; i < spaceCount; ++i)
+							note.text += " ";
 					}else{
 						note.duration = 0;
 						note.pitch = 0;
+						note.text = "\n";
 					}
 					
 					song.notes.add(note);

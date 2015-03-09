@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import edu.csupomona.cs480.data.provider.FSUserManager;
 import edu.csupomona.cs480.data.provider.UserManager;
 import edu.csupomona.cs480.models.Song;
+import edu.csupomona.cs480.models.SongNote;
 import edu.csupomona.cs480.songs.SongParser;
 import edu.csupomona.cs480.util.ResourceResolver;
 
@@ -62,16 +63,26 @@ public class App implements CommandLineRunner{
     	File[] songFiles = ResourceResolver.getAllFilesInFolder("static/lyrics");
     	List<Song> songList = SongParser.parseAll(songFiles);
     	
+    	//Insert Each Song
     	for(Song s:songList){
-    		if(s.insert(jdbcTemplate)){
-    			System.out.println("Song Inserted: " + s.name);
+    		long sId = s.insert(jdbcTemplate);
+    		
+    		//Update Reference in SongNote + Insert Notes
+    		for(SongNote n : s.notes){
+    			n.songId = sId;
+    			n.insert(jdbcTemplate);
     		}
+    		
+    		s.printLyrics();
     	}
     	
     	//Test!
     	List<Song> all = (List<Song>) new Song().selectAll(jdbcTemplate);
-    	for(Song s: all)
+    	for(Song s: all){
     		System.out.println(s.toString());
+//    		for(SongNote n: new SongNote().selectBySongOrdered(s.id, jdbcTemplate))
+//    			System.out.println(n.toString());
+    	}
     }
     
     
