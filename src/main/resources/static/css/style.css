@@ -35,28 +35,35 @@
 		background-color: #4B0082;
 	}
 	#about-header-text {
-		color: #FFFFFF;
+		color: #FA58D0;
 	}
 	#about-karaokin {
+		background-color: #2F0B3A;
 		color: #FFFFFF;
-		padding: 0.5em 0 0em 1em;
+		padding: 0.5em 0 0.5em 1em;
 	}
 	#about-karaokin-paragraph {
-		padding: 0.5em 0 0.5em 1.5em;
+		padding: 0.5em 0.5em 0.5em 1.5em;
+		color: #BF00FF;
+		font-size: 1.35em;
 	}
 	#portable {
 		padding: 0.5em 0 0.5em 1.5em;
-		color: blue;
+		color: #BE81F7;
 	}
 	#portable-paragraph {
-		padding: 0.5em 0 0.5em 1.5em;
+		padding: 0.5em 0.5em 0.5em 1.5em;
 	}
 	#easy {
 		padding: 0.5em 0 0.5em 1.5em;
-		color: blue;
+		color: #BE81F7;
 	}
 	#easy-paragraph {
-		padding: 0.5em 0 0.5em 1.5em;
+		padding: 0.5em 0.5em 0.5em 1.5em;
+	}
+	.paragraph {
+		color: #BF00FF;
+		font-size: 1.35em;
 	}
 
 	strong, b
