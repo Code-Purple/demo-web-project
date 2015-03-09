@@ -1,5 +1,4 @@
 <html>
-    <script src="jquery-2.1.3.js"></script>
     <style>
         .target {
             display: block;
@@ -98,6 +97,13 @@
             height: 100%;
         }
     </style>
+	<head>
+		<script src="../js/jquery.min.js"></script>
+		<script src="../js/textarea-helper.js"></script>
+		<script src="../js/web-speech-test.js"></script>
+		
+		<link rel="stylesheet" type="text/css" href="../css/style.css">
+	</head>
     <body>
         <div class="target">
         </div>
@@ -173,4 +179,118 @@ $(function() {
         });
 });
     </script>
+    
+    <div id="main">
+        <div id="content">
+            <input type="button" id="enable-speech" value="Start Singing" /> <input
+                type="button" id="disable-speech" value="Stop Singing"
+                onclick="CheckLyrics()" />
+            <p>
+                <textarea id="speech-page-content" name="pageContent"></textarea>
+        </div>
+    </div>
+	<script>
+	function CheckLyrics()
+	{
+		document.song.title.value = locate	
+		var text = document.song.title.value
+		
+		var saidLyrics = $('#speech-page-content').val();
+		var client = new XMLHttpRequest();
+		var lyrics = "";
+		
+		if (text.toLowerCase().indexOf("bass") != -1)
+		{
+			client.open('GET', '/rawlyrics/raw_all_about_that_bass.txt');
+		}
+		if (text.toLowerCase().indexOf("dream") != -1)
+		{
+			client.open('GET', '/rawlyrics/raw_dream_a_little_dream_of_me.txt');
+		}
+		if (text.toLowerCase().indexOf("happy") != -1)
+		{
+			client.open('GET', '/rawlyrics/raw_happy.txt');
+		}
+		if (text.toLowerCase().indexOf("prayer") != -1)
+		{
+			client.open('GET', '/rawlyrics/raw_living_on_a_prayer.txt');
+		}
+		if (text.toLowerCase().indexOf("shake") != -1)
+		{
+			client.open('GET', '/rawlyrics/raw_shake_it_off.txt');
+		}
+		if (text.toLowerCase().indexOf("child") != -1)
+		{
+			client.open('GET', '/rawlyrics/raw_sweet_child_of_mine.txt');
+		}
+		client.onreadystatechange = function() {
+			if (client.readyState==4)
+			{
+				lyrics = client.responseText;
+				var n = lyrics.length;
+				var m = saidLyrics.length;
+				console.log(n);
+				console.log(m);
+				value = getEditDistance(lyrics, saidLyrics);
+				console.log(value);
+				var score = (1-value/n) * 100;
+				alert("Great job! You scored " + score + "%!");
+			}
+		}
+		client.send();	
+	}
+	
+	// Compute the edit distance between the two given strings
+	function getEditDistance(a, b) {
+	  if(a.length === 0) return b.length; 
+	  if(b.length === 0) return a.length; 
+	 
+	  var matrix = [];
+	 
+	  // increment along the first column of each row
+	  var i;
+	  for(i = 0; i <= b.length; i++){
+	    matrix[i] = [i];
+	  }
+	 
+	  // increment each column in the first row
+	  var j;
+	  for(j = 0; j <= a.length; j++){
+	    matrix[0][j] = j;
+	  }
+	 
+	  // Fill in the rest of the matrix
+	  for(i = 1; i <= b.length; i++){
+	    for(j = 1; j <= a.length; j++){
+	      if(b.charAt(i-1) == a.charAt(j-1)){
+	        matrix[i][j] = matrix[i-1][j-1];
+	      } else {
+	        matrix[i][j] = Math.min(matrix[i-1][j-1] + 1, // substitution
+	                                Math.min(matrix[i][j-1] + 1, // insertion
+	                                         matrix[i-1][j] + 1)); // deletion
+	      }
+	    }
+	  }
+	 
+	  return matrix[b.length][a.length];
+	};
+	</script>
+
+    <form name="song">
+        <input type="hidden" name="title">
+    </form>
+
+    <script>
+        var locate = window.location
+        document.song.title.value = locate
+        
+        var text = document.song.title.value
+        
+        function delineate(str)
+        {
+            point = str.lastIndexOf("=");
+            return(str.substring(point+1,str.length));
+        }
+        </script>
+    
 </html>
