@@ -9,7 +9,7 @@
 
 	body
 	{
-		background-color: #B9C478;
+		background-color: 	#FFFFFF;
 	}
 
 		body.is-loading * {
@@ -515,12 +515,21 @@ body {
 
 #speech-page-content {
     width: 800px;
-    height: 25px;
-    background-color: rgb(216,216,216);
-    border: 1px;
+    height: 100px;
+    background-color:#F7D6FF;
+    border: 2px double #AD96B2;
     resize: none;
     font-family: arial, sans-serif;
     font-size: 14px;
+    overflow:scroll;
+}
+
+#enable-speech {
+	margin-right:15px;
+}
+
+#disable-speech {
+	margin-left:15px;
 }
 
 #speech-page-content:focus {
