@@ -31,6 +31,10 @@
 				{
 			recognition.stop();
 				});
+		
+		function scrollToBottom() {
+			   $('#speech-page-content').scrollTop($('#speech-page-content')[0].scrollHeight);
+			}
 
 		recognition.onresult = function (event) 
 		{
@@ -50,6 +54,8 @@
 					interimResult += event.results[i][0].transcript + '\u200B';
 				}
 			}
+			
+			scrollToBottom();
 		};
 	});
 })(jQuery);

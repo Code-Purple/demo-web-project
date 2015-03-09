@@ -16,7 +16,10 @@
 
 	<!-- Header -->
 	<header id="header" class="happy">
-
+		<div style="float: left; margin-top: -100px;">
+			<a href="http://karaok.in/index.html"><img
+				src="images/home_button.png" width="150px" height="55px" /></a>
+		</div>
 		<div id="search-container" style="float: right; margin-top: -100px;">
 			<div id="search">
 				<input id="searchbox" style="width: 400px;" type="text"
@@ -33,8 +36,11 @@
 				<li><em>artist: </em> Pharrell Williams</li>
 				<li><em>released: </em> November 21, 2013</li>
 				<li><em>duration: </em> 3:53</li>
-			<div id="singbtn">
-					<button type="button">Sing It!</button>
+				<div id="singbtn">
+					<form>
+						<button type="submit" name="song" value="happy" formmethod="get"
+							formaction="song.html">Sing It!</button>
+					</form>
 				</div>
 			</ul>
 		</h1>

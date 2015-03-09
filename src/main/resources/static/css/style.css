@@ -9,7 +9,7 @@
 
 	body
 	{
-		background-color: #B9C478;
+		background-color: 	#FFFFFF;
 	}
 
 		body.is-loading * {
@@ -30,6 +30,40 @@
 		font-family: 'Jura';
 		font-weight: 300;
 		color: #5d5d5d;
+	}
+	#about-body {
+		background-color: #4B0082;
+	}
+	#about-header-text {
+		color: #FA58D0;
+	}
+	#about-karaokin {
+		background-color: #2F0B3A;
+		color: #FFFFFF;
+		padding: 0.5em 0 0.5em 1em;
+	}
+	#about-karaokin-paragraph {
+		padding: 0.5em 0.5em 0.5em 1.5em;
+		color: #BF00FF;
+		font-size: 1.35em;
+	}
+	#portable {
+		padding: 0.5em 0 0.5em 1.5em;
+		color: #BE81F7;
+	}
+	#portable-paragraph {
+		padding: 0.5em 0.5em 0.5em 1.5em;
+	}
+	#easy {
+		padding: 0.5em 0 0.5em 1.5em;
+		color: #BE81F7;
+	}
+	#easy-paragraph {
+		padding: 0.5em 0.5em 0.5em 1.5em;
+	}
+	.paragraph {
+		color: #BF00FF;
+		font-size: 1.35em;
 	}
 
 	strong, b
@@ -515,12 +549,21 @@ body {
 
 #speech-page-content {
     width: 800px;
-    height: 25px;
-    background-color: rgb(216,216,216);
-    border: 1px;
+    height: 100px;
+    background-color:#F7D6FF;
+    border: 2px double #AD96B2;
     resize: none;
     font-family: arial, sans-serif;
     font-size: 14px;
+    overflow:scroll;
+}
+
+#enable-speech {
+	margin-right:15px;
+}
+
+#disable-speech {
+	margin-left:15px;
 }
 
 #speech-page-content:focus {

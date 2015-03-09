@@ -1,0 +1,176 @@
+<html>
+    <script src="jquery-2.1.3.js"></script>
+    <style>
+        .target {
+            display: block;
+            overflow: auto;
+        }
+        audio {
+            display: block;
+        }
+        .word {
+            float: left;
+            position: relative;
+
+            font-size: 20px;
+            letter-spacing: 2px;
+            margin-left: -1px;
+            padding: 0;
+        }
+
+        .word.marginleft {
+            margin-left: 6px;
+        }
+
+        .word .bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+
+            overflow: hidden;
+        }
+
+        .word .bg span {
+            color: rgb(208, 141, 208);
+            height: 100%;
+            width: 100%;
+        }
+
+        .word.guy .bg span {
+            text-shadow:  1px  1px 0 rgb(136, 166, 231),
+                         -1px  1px 0 rgb(136, 166, 231),
+                          1px -1px 0 rgb(136, 166, 231),
+                         -1px -1px 0 rgb(136, 166, 231),
+                          0    1px 0 rgb(136, 166, 231),
+                          0   -1px 0 rgb(136, 166, 231),
+                         -1px  0   0 rgb(136, 166, 231),
+                          1px  0   0 rgb(136, 166, 231),
+                          2px  2px 0 rgb(136, 166, 231),
+                         -2px  2px 0 rgb(136, 166, 231),
+                          2px -2px 0 rgb(136, 166, 231),
+                         -2px -2px 0 rgb(136, 166, 231),
+                          0    2px 0 rgb(136, 166, 231),
+                          0   -2px 0 rgb(136, 166, 231),
+                         -2px  0   0 rgb(136, 166, 231),
+                          2px  0   0 rgb(136, 166, 231),
+                          1px  2px 0 rgb(136, 166, 231),
+                         -1px  2px 0 rgb(136, 166, 231),
+                          1px -2px 0 rgb(136, 166, 231),
+                         -1px -2px 0 rgb(136, 166, 231),
+                          2px  1px 0 rgb(136, 166, 231),
+                         -2px  1px 0 rgb(136, 166, 231),
+                          2px -1px 0 rgb(136, 166, 231),
+                         -2px -1px 0 rgb(136, 166, 231);
+        }
+
+        .word.girl .bg span {
+            text-shadow:  1px  1px 0 rgb(208, 141, 208),
+                         -1px  1px 0 rgb(208, 141, 208),
+                          1px -1px 0 rgb(208, 141, 208),
+                         -1px -1px 0 rgb(208, 141, 208),
+                          0    1px 0 rgb(208, 141, 208),
+                          0   -1px 0 rgb(208, 141, 208),
+                         -1px  0   0 rgb(208, 141, 208),
+                          1px  0   0 rgb(208, 141, 208),
+                          2px  2px 0 rgb(208, 141, 208),
+                         -2px  2px 0 rgb(208, 141, 208),
+                          2px -2px 0 rgb(208, 141, 208),
+                         -2px -2px 0 rgb(208, 141, 208),
+                          0    2px 0 rgb(208, 141, 208),
+                          0   -2px 0 rgb(208, 141, 208),
+                         -2px  0   0 rgb(208, 141, 208),
+                          2px  0   0 rgb(208, 141, 208),
+                          1px  2px 0 rgb(208, 141, 208),
+                         -1px  2px 0 rgb(208, 141, 208),
+                          1px -2px 0 rgb(208, 141, 208),
+                         -1px -2px 0 rgb(208, 141, 208),
+                          2px  1px 0 rgb(208, 141, 208),
+                         -2px  1px 0 rgb(208, 141, 208),
+                          2px -1px 0 rgb(208, 141, 208),
+                         -2px -1px 0 rgb(208, 141, 208);
+        }
+
+        .word .fg {
+            position: relative;
+            word-break: break-word;
+            height: 100%;
+        }
+    </style>
+    <body>
+        <div class="target">
+        </div>
+        <audio src="songs/mamas-and-the-papas-dream-a-little-dream-of-me.mp3" controls></audio>
+    </body>
+    <script type="text/javascript">
+$(function() {
+        var buildWord = function(data) {
+            var left = '';
+            if(data.marginleft) {
+                left = 'marginleft';
+            }
+            var container = $('<span />', {'class': ['word', data.gender, left].join(' ')});
+            var bgText = $('<span />', {'html': data.word});
+            var bg = $('<span />', {'class': 'bg', 'html': bgText});
+            var fg = $('<span />', {'class': 'fg', 'html': data.word});
+
+            container.append(bg);
+            container.append(fg);
+
+            setTimeout(function() {
+                bg.animate({'width': '100%'}, data.duration);
+            }, data.start);
+
+            return container;
+        };
+
+        var kickoff = function(timeline) {
+            var target = $('.target');
+
+            var i = 0;
+            var start = new Date().getTime();
+
+            var f = function() {
+                var breakIdx = null;
+
+                var now = new Date().getTime();
+                while(i < timeline.length && timeline[i].action != 'break') {
+                    var data = timeline[i];
+                    target.append(buildWord({word: data.part,  gender: 'girl',  start: data.start - (now - start),  duration: data.dur, marginleft: data.marginleft}));
+                    i++;
+                }
+
+
+                var next = timeline[i];
+                if (next !== undefined) {
+                    i++;
+                    var dur = next.start - (now - start);
+                    setTimeout(function() {
+                        target.empty();
+
+                        next = timeline[i];
+                        if(next !== undefined && next.action !== 'end') {
+                            f();
+                        }
+                    }, dur);
+                    console.info('dur:', dur);
+                }
+            };
+
+            f();
+        };
+
+        $.get('jsons/Mama-Cass-Dream-A-Little-Dream-Of-Me.json', function(data) {
+                var audio = $('audio');
+                audio.on('playing', function() {
+                    var delay = data[0].delay || 0;
+                    setTimeout(function() {
+                        kickoff(data);
+                    }, delay);
+                });
+                audio[0].play();
+        });
+});
+    </script>
+</html>
