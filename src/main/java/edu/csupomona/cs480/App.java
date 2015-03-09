@@ -61,7 +61,17 @@ public class App implements CommandLineRunner{
     	//Populate DB with Parsed Values of each song...
     	File[] songFiles = ResourceResolver.getAllFilesInFolder("static/lyrics");
     	List<Song> songList = SongParser.parseAll(songFiles);
-    
+    	
+    	for(Song s:songList){
+    		if(s.insert(jdbcTemplate)){
+    			System.out.println("Song Inserted: " + s.name);
+    		}
+    	}
+    	
+    	//Test!
+    	List<Song> all = (List<Song>) new Song().selectAll(jdbcTemplate);
+    	for(Song s: all)
+    		System.out.println(s.toString());
     }
     
     

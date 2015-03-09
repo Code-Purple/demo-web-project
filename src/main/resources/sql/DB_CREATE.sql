@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS Song
 
 CREATE TABLE IF NOT EXISTS SongNoteType
 (
-	SongNoteTypeID serial PRIMARY KEY,
+	SongNoteTypeID int PRIMARY KEY,
 	Name varchar(30) NOT NULL,
 	PointModifierE2 int NOT NULL
 );
@@ -56,3 +56,9 @@ CREATE TABLE IF NOT EXISTS UserScore
 	Singleplayer boolean NOT NULL,
 	MatchID int REFERENCES Match(MatchID)
 );
+
+INSERT INTO SongNoteType values
+	(0,'Regular', 1.0),
+	(1, 'Golden', 2.0),
+	(2, 'Freestyle', 0.0),
+	(3, 'LineBreak', 0.0);
