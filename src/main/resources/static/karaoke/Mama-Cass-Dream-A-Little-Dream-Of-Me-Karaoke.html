@@ -1,113 +1,23 @@
 <html>
-    <style>
-        .target {
-            display: block;
-            overflow: auto;
-        }
-        audio {
-            display: block;
-        }
-        .word {
-            float: left;
-            position: relative;
-
-            font-size: 20px;
-            letter-spacing: 2px;
-            margin-left: -1px;
-            padding: 0;
-        }
-
-        .word.marginleft {
-            margin-left: 6px;
-        }
-
-        .word .bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 100%;
-
-            overflow: hidden;
-        }
-
-        .word .bg span {
-            color: rgb(208, 141, 208);
-            height: 100%;
-            width: 100%;
-        }
-
-        .word.guy .bg span {
-            text-shadow:  1px  1px 0 rgb(136, 166, 231),
-                         -1px  1px 0 rgb(136, 166, 231),
-                          1px -1px 0 rgb(136, 166, 231),
-                         -1px -1px 0 rgb(136, 166, 231),
-                          0    1px 0 rgb(136, 166, 231),
-                          0   -1px 0 rgb(136, 166, 231),
-                         -1px  0   0 rgb(136, 166, 231),
-                          1px  0   0 rgb(136, 166, 231),
-                          2px  2px 0 rgb(136, 166, 231),
-                         -2px  2px 0 rgb(136, 166, 231),
-                          2px -2px 0 rgb(136, 166, 231),
-                         -2px -2px 0 rgb(136, 166, 231),
-                          0    2px 0 rgb(136, 166, 231),
-                          0   -2px 0 rgb(136, 166, 231),
-                         -2px  0   0 rgb(136, 166, 231),
-                          2px  0   0 rgb(136, 166, 231),
-                          1px  2px 0 rgb(136, 166, 231),
-                         -1px  2px 0 rgb(136, 166, 231),
-                          1px -2px 0 rgb(136, 166, 231),
-                         -1px -2px 0 rgb(136, 166, 231),
-                          2px  1px 0 rgb(136, 166, 231),
-                         -2px  1px 0 rgb(136, 166, 231),
-                          2px -1px 0 rgb(136, 166, 231),
-                         -2px -1px 0 rgb(136, 166, 231);
-        }
-
-        .word.girl .bg span {
-            text-shadow:  1px  1px 0 rgb(208, 141, 208),
-                         -1px  1px 0 rgb(208, 141, 208),
-                          1px -1px 0 rgb(208, 141, 208),
-                         -1px -1px 0 rgb(208, 141, 208),
-                          0    1px 0 rgb(208, 141, 208),
-                          0   -1px 0 rgb(208, 141, 208),
-                         -1px  0   0 rgb(208, 141, 208),
-                          1px  0   0 rgb(208, 141, 208),
-                          2px  2px 0 rgb(208, 141, 208),
-                         -2px  2px 0 rgb(208, 141, 208),
-                          2px -2px 0 rgb(208, 141, 208),
-                         -2px -2px 0 rgb(208, 141, 208),
-                          0    2px 0 rgb(208, 141, 208),
-                          0   -2px 0 rgb(208, 141, 208),
-                         -2px  0   0 rgb(208, 141, 208),
-                          2px  0   0 rgb(208, 141, 208),
-                          1px  2px 0 rgb(208, 141, 208),
-                         -1px  2px 0 rgb(208, 141, 208),
-                          1px -2px 0 rgb(208, 141, 208),
-                         -1px -2px 0 rgb(208, 141, 208),
-                          2px  1px 0 rgb(208, 141, 208),
-                         -2px  1px 0 rgb(208, 141, 208),
-                          2px -1px 0 rgb(208, 141, 208),
-                         -2px -1px 0 rgb(208, 141, 208);
-        }
-
-        .word .fg {
-            position: relative;
-            word-break: break-word;
-            height: 100%;
-        }
-    </style>
-    	<head>
+	<head>
 		<script src="../js/jquery.min.js"></script>
 		<script src="../js/textarea-helper.js"></script>
 		<script src="../js/web-speech-test.js"></script>
-		
+
 		<link rel="stylesheet" type="text/css" href="../css/style.css">
+		<link rel="stylesheet" type="text/css" href="../css/karaoke.css">
 	</head>
     <body>
         <div class="target">
         </div>
         <audio src="../songs/mamas-and-the-papas-dream-a-little-dream-of-me.mp3" autoplay="autoplay" controls></audio>
+    <div id="word-box">
+            <input type="button" id="enable-speech" value="Start Singing" /> <input
+                type="button" id="disable-speech" value="Stop Singing"
+                onclick="CheckLyrics()" />
+            <p>
+                <textarea id="speech-page-content" name="pageContent"></textarea>
+    </div>
     </body>
     <script type="text/javascript">
 $(function() {
@@ -180,15 +90,6 @@ $(function() {
 });
     </script>
     
-    <div id="main">
-        <div id="content">
-            <input type="button" id="enable-speech" value="Start Singing" /> <input
-                type="button" id="disable-speech" value="Stop Singing"
-                onclick="CheckLyrics()" />
-            <p>
-                <textarea id="speech-page-content" name="pageContent"></textarea>
-        </div>
-    </div>
 	<script>
 	function CheckLyrics()
 	{
