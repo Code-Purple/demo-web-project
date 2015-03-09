@@ -1,27 +1,105 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <script src="http://code.createjs.com/easeljs-0.7.0.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenLite.min.js"></script>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/textarea-helper.js"></script>
-    <script src="js/web-speech-test.js"></script>
-    <title>Song Karaoke Sample Page</title>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="" />
-    <!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<script src="http://code.createjs.com/easeljs-0.7.0.min.js"></script>
+<script
+	src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenLite.min.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/textarea-helper.js"></script>
+<script src="js/web-speech-test.js"></script>
+<title>Song Karaoke Sample Page</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
 </head>
 <body>
-	<canvas id="stage" width="500" height="100"></canvas>
-<!-- 		<div id="main">																-->
-<!--			<div id="content">														-->
-<!--				<input type="button" id="enable-speech" value="Enable Speech" />	-->
-<!--				<input type="button" id="disable-speech" value="Disable Speech" />	-->
-<!--				<br> <br>															-->
-<!--				<textarea id="speech-page-content" name="pageContent"></textarea>	-->
-<!--			</div>																	-->
-<!--		</div>																		-->
+	<div id="main">
+		<div id="content">
+			<input type="button" id="enable-speech" value="Start Singing" /> <input
+				type="button" id="disable-speech" value="Stop Singing"
+				onclick="CheckLyrics()" />
+			<p>
+				<textarea id="speech-page-content" name="pageContent"></textarea>
+		</div>
+	</div>
+
 	<script>
+	function CheckLyrics()
+	{
+		document.song.title.value = locate	
+		var text = document.song.title.value
+		
+		var saidLyrics = $('#speech-page-content').val();
+		var client = new XMLHttpRequest();
+		var lyrics = "";
+		
+		if (text.toLowerCase().indexOf("bass") != -1)
+		{
+			client.open('GET', '/rawlyrics/raw_all_about_that_bass.txt');
+		}
+		if (text.toLowerCase().indexOf("dream") != -1)
+		{
+			client.open('GET', '/rawlyrics/raw_dream_a_little_dream_of_me.txt');
+		}
+		if (text.toLowerCase().indexOf("happy") != -1)
+		{
+			client.open('GET', '/rawlyrics/raw_happy.txt');
+		}
+		if (text.toLowerCase().indexOf("prayer") != -1)
+		{
+			client.open('GET', '/rawlyrics/raw_living_on_a_prayer.txt');
+		}
+		if (text.toLowerCase().indexOf("shake") != -1)
+		{
+			client.open('GET', '/rawlyrics/raw_shake_it_off.txt');
+		}
+		if (text.toLowerCase().indexOf("child") != -1)
+		{
+			client.open('GET', '/rawlyrics/raw_sweet_child_of_mine.txt');
+		}
+		client.onreadystatechange = function() {
+			if (client.readyState==4)
+			{
+				lyrics = client.responseText;
+				
+				console.log(value);
+			}
+		}
+		client.send();	
+	}
+	
+	function levenshteinDistance (s, t) {
+        if (s.length === 0) return t.length;
+        if (t.length === 0) return s.length;
+ 
+        return Math.min(
+                levenshteinDistance(s.substr(1), t) + 1,
+                levenshteinDistance(t.substr(1), s) + 1,
+                levenshteinDistance(s.substr(1), t.substr(1)) + (s[0] !== t[0] ? 1 : 0)
+        );
+}
+	</script>
+
+	<form name="song">
+		<input type="hidden" name="title">
+	</form>
+
+	<script>
+		var locate = window.location
+		document.song.title.value = locate
+		
+		var text = document.song.title.value
+		
+		function delineate(str)
+		{
+			point = str.lastIndexOf("=");
+			return(str.substring(point+1,str.length));
+		}
+		</script>
+
+</body>
+<script>
 	(function(){
     var stage, textStage, form, input;
     var circles, textPixels, textFormed;
