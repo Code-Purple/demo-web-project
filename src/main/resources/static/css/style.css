@@ -31,6 +31,33 @@
 		font-weight: 300;
 		color: #5d5d5d;
 	}
+	#about-body {
+		background-color: #4B0082;
+	}
+	#about-header-text {
+		color: #FFFFFF;
+	}
+	#about-karaokin {
+		color: #FFFFFF;
+		padding: 0.5em 0 0em 1em;
+	}
+	#about-karaokin-paragraph {
+		padding: 0.5em 0 0.5em 1.5em;
+	}
+	#portable {
+		padding: 0.5em 0 0.5em 1.5em;
+		color: blue;
+	}
+	#portable-paragraph {
+		padding: 0.5em 0 0.5em 1.5em;
+	}
+	#easy {
+		padding: 0.5em 0 0.5em 1.5em;
+		color: blue;
+	}
+	#easy-paragraph {
+		padding: 0.5em 0 0.5em 1.5em;
+	}
 
 	strong, b
 	{
