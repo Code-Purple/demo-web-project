@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class Song implements IDataModel{
-	public int songId;
+	public long songId;
 	public String name;
 	public String artist;
 	public String mp3Url;

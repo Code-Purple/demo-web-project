@@ -2,6 +2,7 @@ package edu.csupomona.cs480;
 
 import java.io.File;
 import java.nio.file.Files;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -12,6 +13,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import edu.csupomona.cs480.data.provider.FSUserManager;
 import edu.csupomona.cs480.data.provider.UserManager;
+import edu.csupomona.cs480.models.Song;
+import edu.csupomona.cs480.songs.SongParser;
 import edu.csupomona.cs480.util.ResourceResolver;
 
 @SpringBootApplication
@@ -55,8 +58,10 @@ public class App implements CommandLineRunner{
     	
     	System.out.println("DB Initialized.");
     	
-    	//
-    	
+    	//Populate DB with Parsed Values of each song...
+    	File[] songFiles = ResourceResolver.getAllFilesInFolder("static/lyrics");
+    	List<Song> songList = SongParser.parseAll(songFiles);
+    
     }
     
     

@@ -12,11 +12,21 @@ import edu.csupomona.cs480.models.SongNoteType;
 
 public class SongParser {
 	
-	public void parseAll(){
+	public static List<Song> parseAll(File[] files){
+		ArrayList<Song> songs = new ArrayList<Song>();
+		for(File file: files){
+			Song n = parseFile(file);
+			if(n != null){
+				songs.add(n);
+			}else{
+				System.out.println("SongParser: Error Parsing File " + file.getName());
+			}
+		}
 		
+		return songs;
 	}
 	
-	public Song parseFile(File file){
+	public static Song parseFile(File file){
 		try {
 			List<String> lines = Files.readAllLines(file.toPath(), Charset.forName("US-ASCII"));
 			
