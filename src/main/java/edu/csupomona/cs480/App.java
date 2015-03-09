@@ -1,18 +1,24 @@
 package edu.csupomona.cs480;
 
+import java.io.File;
+import java.nio.file.Files;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import edu.csupomona.cs480.data.provider.FSUserManager;
 import edu.csupomona.cs480.data.provider.UserManager;
+import edu.csupomona.cs480.util.ResourceResolver;
 
-@Configuration
-@EnableAutoConfiguration
-@ComponentScan
-public class App {
+@SpringBootApplication
+public class App implements CommandLineRunner{
+	
+	@Autowired
+	JdbcTemplate jdbcTemplate;
 
     /**
      * This is a good example of how Spring instantiates
@@ -37,4 +43,21 @@ public class App {
         // Run Spring Boot
         SpringApplication.run(App.class, args);
     }
+    
+    @Override
+    public void run(String... strings) throws Exception {
+    	//Create DB and Tables
+    	System.out.println("Initializing DB!");
+    	File creationScript = ResourceResolver.getFileFromRelativePath("sql/DB_CREATE.sql");
+    	String sql = new String(Files.readAllBytes(creationScript.toPath()));
+    	
+    	jdbcTemplate.execute(sql);
+    	
+    	System.out.println("DB Initialized.");
+    	
+    	//
+    	
+    }
+    
+    
 }
