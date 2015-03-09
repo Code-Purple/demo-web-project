@@ -1,0 +1,114 @@
+html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: url("../images/kara_img_1.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+.target {
+    margin: 25em 0 0 54em;
+    display: block;
+    overflow: auto;
+}
+audio {
+    display: block;
+    margin: 15em auto;
+}
+
+#word-box{
+    margin: -30em 2em 2em 0em;
+}
+.word {
+    float: left;
+    position: relative;
+
+    font-size: 20px;
+    letter-spacing: 2px;
+    margin-left: -1px;
+    padding: 0;
+}
+
+.word.marginleft {
+    margin-left: 6px;
+}
+
+.word .bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+
+    overflow: hidden;
+}
+
+.word .bg span {
+    color: rgb(208, 141, 208);
+    height: 100%;
+    width: 100%;
+}
+
+.word.guy .bg span {
+    text-shadow:  1px  1px 0 rgb(136, 166, 231),
+                 -1px  1px 0 rgb(136, 166, 231),
+                  1px -1px 0 rgb(136, 166, 231),
+                 -1px -1px 0 rgb(136, 166, 231),
+                  0    1px 0 rgb(136, 166, 231),
+                  0   -1px 0 rgb(136, 166, 231),
+                 -1px  0   0 rgb(136, 166, 231),
+                  1px  0   0 rgb(136, 166, 231),
+                  2px  2px 0 rgb(136, 166, 231),
+                 -2px  2px 0 rgb(136, 166, 231),
+                  2px -2px 0 rgb(136, 166, 231),
+                 -2px -2px 0 rgb(136, 166, 231),
+                  0    2px 0 rgb(136, 166, 231),
+                  0   -2px 0 rgb(136, 166, 231),
+                 -2px  0   0 rgb(136, 166, 231),
+                  2px  0   0 rgb(136, 166, 231),
+                  1px  2px 0 rgb(136, 166, 231),
+                 -1px  2px 0 rgb(136, 166, 231),
+                  1px -2px 0 rgb(136, 166, 231),
+                 -1px -2px 0 rgb(136, 166, 231),
+                  2px  1px 0 rgb(136, 166, 231),
+                 -2px  1px 0 rgb(136, 166, 231),
+                  2px -1px 0 rgb(136, 166, 231),
+                 -2px -1px 0 rgb(136, 166, 231);
+}
+
+.word.girl .bg span {
+    text-shadow:  1px  1px 0 rgb(208, 141, 208),
+                 -1px  1px 0 rgb(208, 141, 208),
+                  1px -1px 0 rgb(208, 141, 208),
+                 -1px -1px 0 rgb(208, 141, 208),
+                  0    1px 0 rgb(208, 141, 208),
+                  0   -1px 0 rgb(208, 141, 208),
+                 -1px  0   0 rgb(208, 141, 208),
+                  1px  0   0 rgb(208, 141, 208),
+                  2px  2px 0 rgb(208, 141, 208),
+                 -2px  2px 0 rgb(208, 141, 208),
+                  2px -2px 0 rgb(208, 141, 208),
+                 -2px -2px 0 rgb(208, 141, 208),
+                  0    2px 0 rgb(208, 141, 208),
+                  0   -2px 0 rgb(208, 141, 208),
+                 -2px  0   0 rgb(208, 141, 208),
+                  2px  0   0 rgb(208, 141, 208),
+                  1px  2px 0 rgb(208, 141, 208),
+                 -1px  2px 0 rgb(208, 141, 208),
+                  1px -2px 0 rgb(208, 141, 208),
+                 -1px -2px 0 rgb(208, 141, 208),
+                  2px  1px 0 rgb(208, 141, 208),
+                 -2px  1px 0 rgb(208, 141, 208),
+                  2px -1px 0 rgb(208, 141, 208),
+                 -2px -1px 0 rgb(208, 141, 208);
+}
+
+.word .fg {
+    position: relative;
+    word-break: break-word;
+    height: 100%;
+}

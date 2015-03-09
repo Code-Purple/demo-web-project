@@ -6,8 +6,14 @@
 /*********************************************************************************/
 /* Basic                                                                         */
 /*********************************************************************************/
+html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
 
-	body
+    body
 	{
 		background-color: 	#FFFFFF;
 	}
@@ -31,7 +37,7 @@
 		font-weight: 300;
 		color: #5d5d5d;
 	}
-	#about-body {
+    #about-body {
 		background-color: #4B0082;
 	}
 	#about-header-text {
@@ -537,9 +543,6 @@ body {
 
 #content {
     display: table-cell;
-    vertical-align: middle;
-    height: 100%;
-    width: 100%;
 }
 
 #about {
