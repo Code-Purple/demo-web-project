@@ -62,8 +62,14 @@
 			if (client.readyState==4)
 			{
 				lyrics = client.responseText;
+				var n = lyrics.length;
+				var m = saidLyrics.length;
+				console.log(n);
+				console.log(m);
 				value = getEditDistance(lyrics, saidLyrics);
 				console.log(value);
+				var score = (1-value/n) * 100;
+				alert("Great job! You scored " + score + "%!");
 			}
 		}
 		client.send();	
