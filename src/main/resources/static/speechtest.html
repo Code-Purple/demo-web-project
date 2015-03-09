@@ -9,11 +9,23 @@
 	<div id="main">
 		<div id="content">
 			<input type="button" id="enable-speech" value="Start Singing" /> 
-			<input type="button" id="disable-speech" value="Stop Singing" /> 
+			<input type="button" id="disable-speech" value="Stop Singing" onclick="CheckLyrics()"/> 
 			<p>
 			<textarea id="speech-page-content" name="pageContent"></textarea>
-			
 		</div>
 	</div>
+	
+	<script>
+	function CheckLyrics()
+	{
+		var client = new XMLHttpRequest();
+		client.open('GET', '/rawlyrics/raw_all_about_that_base.txt');
+		client.onreadystatechange = function() {
+		  alert(client.responseText);
+		}
+		client.send();
+	}
+	</script>
+	
 </body>
 </html>
