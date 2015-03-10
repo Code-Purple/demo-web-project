@@ -112,3 +112,22 @@ audio {
     word-break: break-word;
     height: 100%;
 }
+
+#speech-page-content {
+    width: 800px;
+    height: 100px;
+    background-color:#F7D6FF;
+    border: 2px double #AD96B2;
+    resize: none;
+    font-family: arial, sans-serif;
+    font-size: 14px;
+    overflow:scroll;
+}
+
+#enable-speech {
+	margin-right:15px;
+}
+
+#disable-speech {
+	margin-left:15px;
+}

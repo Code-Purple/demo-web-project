@@ -1,14 +1,14 @@
 package edu.csupomona.cs480.controller;
 
+import java.sql.PreparedStatement;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.ModelMap;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,14 +17,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import singleton.SayHello;
+
+import com.google.common.collect.Ordering;
+
 import edu.csupomona.cs480.App;
 import edu.csupomona.cs480.GsonExample;
 import edu.csupomona.cs480.HTMLParser;
 import edu.csupomona.cs480.data.User;
 import edu.csupomona.cs480.data.provider.UserManager;
-import singleton.SayHello;
-
-import com.google.common.collect.Ordering;
+import edu.csupomona.cs480.models.Song;
 
 /**
  * This is the controller used by Spring framework.
@@ -36,6 +38,9 @@ import com.google.common.collect.Ordering;
 
 @RestController
 public class WebController {
+	
+	@Autowired
+	JdbcTemplate jdbcTemplate;
 
 	/**
 	 * When the class instance is annotated with
@@ -62,6 +67,20 @@ public class WebController {
 		// with the URL: http://localhost:8080/
 		return "OK";
 	}
+	
+	//Search Songs
+	@RequestMapping(value = "/songs/search/{query}", method = RequestMethod.GET)
+	@ResponseBody List<Song> searchSongs(@PathVariable("query") String query) {
+		return new Song().search(query, jdbcTemplate);
+	}
+	
+	@RequestMapping(value = "/songs/{id}", method = RequestMethod.GET)
+	@ResponseBody Song getSong(@PathVariable("id") int id) {
+		Song s = new Song().selectSingle(id, jdbcTemplate);
+		s.loadNotes(jdbcTemplate);
+		return s;
+	}
+	
 
 	/**
 	 * This is a simple example of how to use a data manager
