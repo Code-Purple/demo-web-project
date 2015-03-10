@@ -36,6 +36,24 @@ public class Song extends DataModel{
 		this.populateFromResultSet(rs);
 	}
 	
+	public List<Song> search(String query, JdbcTemplate jdbc){
+		String paddedQuery = "%" + query + "%";
+		List<Song> result = jdbc.query("Select * from Song where Name like ? or Artist like ?;",
+				new Object[] {paddedQuery, paddedQuery},
+				new RowMapper<Song>() {
+					@Override
+		            public Song mapRow(ResultSet rs, int rowNum) throws SQLException {
+						Song s = new Song();
+						
+						s.populateFromResultSet(rs);
+						
+						return s;
+		            }
+				});
+		
+		return result;
+	}
+	
 	public void deriveLyricLines(){
 		if(this.notes != null){
 			String line ="";
