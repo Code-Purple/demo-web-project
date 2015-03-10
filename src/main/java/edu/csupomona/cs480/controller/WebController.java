@@ -62,6 +62,8 @@ public class WebController {
 		// with the URL: http://localhost:8080/
 		return "OK";
 	}
+	
+	
 
 	/**
 	 * This is a simple example of how to use a data manager
