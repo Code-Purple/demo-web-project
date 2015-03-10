@@ -159,4 +159,10 @@ public class Song extends DataModel{
 		pState.setInt(4, GAP);
 		return pState;
 	}
+
+	public void loadNotes(JdbcTemplate jdbc) {
+		if(this.notes == null){
+			this.notes = new SongNote().selectBySongOrdered(this.id, jdbc);
+		}
+	}
 }

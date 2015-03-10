@@ -74,6 +74,13 @@ public class WebController {
 		return new Song().search(query, jdbcTemplate);
 	}
 	
+	@RequestMapping(value = "/songs/{id}", method = RequestMethod.GET)
+	@ResponseBody Song getSong(@PathVariable("id") int id) {
+		Song s = new Song().selectSingle(id, jdbcTemplate);
+		s.loadNotes(jdbcTemplate);
+		return s;
+	}
+	
 
 	/**
 	 * This is a simple example of how to use a data manager
