@@ -14,6 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import edu.csupomona.cs480.auth.AuthenticationManager;
 import edu.csupomona.cs480.config.Config;

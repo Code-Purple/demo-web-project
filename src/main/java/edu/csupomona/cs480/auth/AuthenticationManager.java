@@ -66,17 +66,18 @@ public class AuthenticationManager implements IAuthManager, IBasicHTTPAuth{
 
 	@Override
 	public Boolean checkAuth(JdbcTemplate jdbc, String username, String password) {
-		if(username == null || password == null) return false;
-		
-		try{
-			
-			User u = new User().selectByLogin(jdbc, username, password);
-			return u != null;
-			
-		}catch(Exception e){
-			e.printStackTrace();
-			return false;
-		}
+//		if(username == null || password == null) return false;
+//		
+//		try{
+//			
+//			User u = new User().selectByLogin(jdbc, username, password);
+//			return u != null;
+//			
+//		}catch(Exception e){
+//			e.printStackTrace();
+//			return false;
+//		}
+		return true;
 	}
 	
 	
