@@ -11,6 +11,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 public abstract class DataModel {
 	public Long id;
 	
+	public DataModel() {};
+	
+	public DataModel(ResultSet rs) throws SQLException {
+		this.populateFromResultSet(rs);
+	}
+	
 //	public boolean update(JdbcTemplate jdbc);
 //	public boolean delete(JdbcTemplate jdbc);
 	public abstract PreparedStatement getInsertStatement(JdbcTemplate jdbc) throws SQLException; //returns new id

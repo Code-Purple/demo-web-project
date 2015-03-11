@@ -1,6 +1,6 @@
 package edu.csupomona.cs480.controller;
 
-import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collections;
@@ -8,25 +8,27 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import singleton.SayHello;
 
 import com.google.common.collect.Ordering;
 
-import edu.csupomona.cs480.App;
 import edu.csupomona.cs480.GsonExample;
 import edu.csupomona.cs480.HTMLParser;
-import edu.csupomona.cs480.data.User;
+import edu.csupomona.cs480.auth.AuthenticationManager;
 import edu.csupomona.cs480.data.provider.UserManager;
 import edu.csupomona.cs480.models.Song;
+import edu.csupomona.cs480.models.User;
 
 /**
  * This is the controller used by Spring framework.
@@ -42,44 +44,113 @@ public class WebController {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 
-	/**
-	 * When the class instance is annotated with
-	 * {@link Autowired}, it will be looking for the actual
-	 * instance from the defined beans.
-	 * <p>
-	 * In our project, all the beans are defined in
-	 * the {@link App} class.
-	 */
 	@Autowired
 	private UserManager userManager;
+	
+	@Autowired
+	private AuthenticationManager authManager;
 
-	/**
-	 * This is a simple example of how the HTTP API works.
-	 * It returns a String "OK" in the HTTP response.
-	 * To try it, run the web application locally,
-	 * in your web browser, type the link:
-	 * 	http://localhost:8080/cs480/ping
+	/*
+	 * Karaok.in Client API Section
+	 * All methods which require Authorization will accept a standard Basic HTTP Authorization Header
+	 * Or username=...&password=... in the appropriate form (GET vs. POST)
 	 */
-	@RequestMapping(value = "/cs480/ping", method = RequestMethod.GET)
-	String healthCheck() {
-		// You can replace this with other string,
-		// and run the application locally to check your changes
-		// with the URL: http://localhost:8080/
-		return "OK";
-	}
 	
 	//Search Songs
 	@RequestMapping(value = "/songs/search/{query}", method = RequestMethod.GET)
-	@ResponseBody List<Song> searchSongs(@PathVariable("query") String query) {
-		return new Song().search(query, jdbcTemplate);
+	public ResponseEntity<List<Song>> searchSongs(@PathVariable("query") String query, 
+			@RequestHeader(value = "Authorization", required = false) String auth, @RequestParam(value="username", required = false) String username,  @RequestParam(value="password", required = false) String password) {
+		
+		if(auth == null){
+			if(!authManager.checkAuth(jdbcTemplate, username, password))
+				return new ResponseEntity<List<Song>>(HttpStatus.FORBIDDEN);
+		}else{
+			if(!authManager.basicHTTPCheckHeader(jdbcTemplate, auth))
+				return new ResponseEntity<List<Song>>(HttpStatus.FORBIDDEN);
+		}
+		
+		return new ResponseEntity<List<Song>>(new Song().search(query, jdbcTemplate), HttpStatus.OK);
 	}
 	
+	//Get Song Including Notes
 	@RequestMapping(value = "/songs/{id}", method = RequestMethod.GET)
-	@ResponseBody Song getSong(@PathVariable("id") int id) {
+	public ResponseEntity<Song> getSong(@PathVariable("id") int id,
+			@RequestHeader(value = "Authorization", required = false) String auth, @RequestParam(value="username", required = false) String username,  @RequestParam(value="password", required = false) String password) {
+		
+		if(auth == null){
+			if(!authManager.checkAuth(jdbcTemplate, username, password))
+				return new ResponseEntity<Song>(HttpStatus.FORBIDDEN);
+		}else{
+			if(!authManager.basicHTTPCheckHeader(jdbcTemplate, auth))
+				return new ResponseEntity<Song>(HttpStatus.FORBIDDEN);
+		}
+		
+		
 		Song s = new Song().selectSingle(id, jdbcTemplate);
 		s.loadNotes(jdbcTemplate);
-		return s;
+		return new ResponseEntity<Song>(s, HttpStatus.OK);
 	}
+	
+	//Create User
+	@RequestMapping(value = "/users", method = RequestMethod.POST)
+	public @ResponseBody ResponseEntity<User> createUser(@RequestParam("username") String username, @RequestParam("password") String password, @RequestHeader(value = "Authorization", required = false) String auth) {
+		User u = new User();
+		
+		if(auth == null){
+			u.username = username;
+			u.password = password;
+		}else{
+			String[] parts = authManager.basicHTTPDecode(auth);
+			if(parts == null){
+				//Auth is improperly formatted
+				
+				return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
+			}
+			
+			u.username = parts[0];
+			u.password = parts[1];
+		}
+		
+		int retries = 3;
+		
+		while(retries -- > 0){
+			try{
+				Long id = u.insert(jdbcTemplate);
+				return new ResponseEntity<User>(u, HttpStatus.OK);
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
+		
+		return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
+	}
+	
+	//Check User login
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public @ResponseBody ResponseEntity<Boolean> loginUser(@RequestParam(value="username", required=false) String username, @RequestParam(value="password", required=false) String password, @RequestHeader(value="Authorization", required=false) String auth) {
+		int retries = 3;
+		
+		while(retries -- > 0){
+			try{
+				if(auth == null)
+					return new ResponseEntity<Boolean>(authManager.checkAuth(jdbcTemplate, username, password), HttpStatus.OK);
+				else
+					return new ResponseEntity<Boolean>(authManager.basicHTTPCheckHeader(jdbcTemplate, auth), HttpStatus.OK);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		
+		return new ResponseEntity<Boolean>(HttpStatus.BAD_REQUEST);
+	}
+	
+	//Submit User Score
+	
+	
+	
+	/*
+	 * Assignments and other tests section.
+	 */
 	
 
 	/**
@@ -91,12 +162,12 @@ public class WebController {
 	 * <p>
 	 * Try it in your web browser:
 	 * 	http://localhost:8080/cs480/user/user101
-	 */
-	@RequestMapping(value = "/cs480/user/{userId}", method = RequestMethod.GET)
-	User getUser(@PathVariable("userId") String userId) {
-		User user = userManager.getUser(userId);
-		return user;
-	}
+//	 */
+//	@RequestMapping(value = "/cs480/user/{userId}", method = RequestMethod.GET)
+//	User getUser(@PathVariable("userId") String userId) {
+//		User user = userManager.getUser(userId);
+//		return user;
+//	}
 
 	/**
 	 * This is an example of sending an HTTP POST request to
@@ -116,18 +187,18 @@ public class WebController {
 	 * @param major
 	 * @return
 	 */
-	@RequestMapping(value = "/cs480/user/{userId}", method = RequestMethod.POST)
-	User updateUser(
-			@PathVariable("userId") String id,
-			@RequestParam("name") String name,
-			@RequestParam(value = "major", required = false) String major) {
-		User user = new User();
-		user.setId(id);
-		user.setMajor(major);
-		user.setName(name);
-		userManager.updateUser(user);
-		return user;
-	}
+//	@RequestMapping(value = "/cs480/user/{userId}", method = RequestMethod.POST)
+//	User updateUser(
+//			@PathVariable("userId") String id,
+//			@RequestParam("name") String name,
+//			@RequestParam(value = "major", required = false) String major) {
+//		User user = new User();
+//		user.setId(id);
+//		user.setMajor(major);
+//		user.setName(name);
+//		userManager.updateUser(user);
+//		return user;
+//	}
 
 	/**
 	 * This API deletes the user. It uses HTTP DELETE method.
@@ -145,22 +216,22 @@ public class WebController {
 	 *
 	 * @return
 	 */
-	@RequestMapping(value = "/cs480/users/list", method = RequestMethod.GET)
-	List<User> listAllUsers() {
-		return userManager.listAllUsers();
-	}
+//	@RequestMapping(value = "/cs480/users/list", method = RequestMethod.GET)
+//	List<User> listAllUsers() {
+//		return userManager.listAllUsers();
+//	}
 
 	/*********** Web UI Test Utility **********/
 	/**
 	 * This method provide a simple web UI for you to test the different
 	 * functionalities used in this web service.
 	 */
-	@RequestMapping(value = "/cs480/home", method = RequestMethod.GET)
-	ModelAndView getUserHomepage() {
-		ModelAndView modelAndView = new ModelAndView("home");
-		modelAndView.addObject("users", listAllUsers());
-		return modelAndView;
-	}
+//	@RequestMapping(value = "/cs480/home", method = RequestMethod.GET)
+//	ModelAndView getUserHomepage() {
+//		ModelAndView modelAndView = new ModelAndView("home");
+//		modelAndView.addObject("users", listAllUsers());
+//		return modelAndView;
+//	}
 
 	
 

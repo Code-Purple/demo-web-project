@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import edu.csupomona.cs480.auth.AuthenticationManager;
 import edu.csupomona.cs480.data.provider.FSUserManager;
 import edu.csupomona.cs480.data.provider.UserManager;
 import edu.csupomona.cs480.models.Song;
@@ -35,6 +36,12 @@ public class App implements CommandLineRunner{
     public UserManager userManager() {
         UserManager userManager = new FSUserManager();
         return userManager;
+    }
+    
+    @Bean
+    public AuthenticationManager authManager() {
+    	AuthenticationManager auth = new AuthenticationManager();
+        return auth;
     }
 
     /**
