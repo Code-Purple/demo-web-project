@@ -17,8 +17,12 @@ import java.util.zip.ZipInputStream;
 public class ResourceResolver {
 	
 	public static final Boolean IsJar(){
-    	final File jarFile = new File(ResourceResolver.class.getProtectionDomain().getCodeSource().getLocation().getPath());
-		return jarFile.isFile();
+//    	final File jarFile = new File(ResourceResolver.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+//		return jarFile.isFile();
+		 String className = ResourceResolver.class.getName().replace('.', '/');
+		 String classJar =
+				 ResourceResolver.class.getResource("/" + className + ".class").toString();
+		 return classJar.startsWith("jar:");
 	}
 
 	/** The base folder to store all the data used by this project. */
