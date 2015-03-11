@@ -1,0 +1,10 @@
+HTTP/1.1 200 OK
+Date: Tue, 10 Mar 2015 23:41:03 GMT
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: POST, GET, OPTIONS, DELETE
+Access-Control-Max-Age: 3600
+Access-Control-Allow-Headers: x-requested-with
+Content-Type: application/json;charset=UTF-8
+Transfer-Encoding: chunked
+Server: Jetty(9.2.4.v20141103)
+
