@@ -1,6 +1,6 @@
-Welcome to Karaokin' (as in "Let's go karaokin'!")
+#Welcome to Karaokin'
 
-Currently located at karaok.in/index.html
+Currently located at karaok.in
 
 Play your favorite karaoke hits all on your browser.
 
