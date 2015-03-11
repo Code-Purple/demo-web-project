@@ -10,7 +10,7 @@
     <body>
         <div class="target">
         </div>
-        <audio src="/songs/pharrell-williams-happy.mp3" autoplay="autoplay" controls></audio>
+        <audio src="../songs/pharrell-williams-happy.mp3" autoplay="autoplay" controls></audio>
         <div id="word-box">
             <input type="button" id="enable-speech" value="Start Singing" /> <input
                 type="button" id="disable-speech" value="Stop Singing"
@@ -77,7 +77,7 @@ $(function() {
             f();
         };
 
-        $.get('/jsons/pharrell-williams-happy.json', function(data) {
+        $.get('../jsons/pharrell-williams-happy.json', function(data) {
                 var audio = $('audio');
                 audio.on('playing', function() {
                     var delay = data[0].delay || 0;
