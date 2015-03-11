@@ -601,6 +601,35 @@ span {
   display: block;
 }
 
+.button-about {
+	/* POSITIONING */
+  padding: 15px;
+  margin-left: 1.5em;
+  border-radius: 8px;
+  position: relative;
+  
+  	
+	/* BUTTON STYLING */
+  border-top: 1px solid #fff;
+  box-shadow: 0 5px 8px #BDBAC0, 0 8px 0 #002851, -2px 1px 0 #003872, 2px 1px 0 #003872, 0px 8px 10px #000, 0 10px 30px #1b1b1b;
+
+  /* FONT STYLING */
+  font: bold 18px 'Jura', helvetica;
+  letter-spacing: 3px;
+  text-decoration: none;
+  text-shadow: -1px -1px 1px #00172e,1px 1px 1px #366391;
+  color: #5b595E;
+}
+.button-about:hover {  
+  /* BUTTON SHADOW */
+ box-shadow: 0 6px 6px #002851, 0 6px 0 #002851, -1px 0px 0 #003872, 0px 0px 0 #003872, 0px 7px 8px #000, 0 7px 20px #1b1b1b;
+}
+
+.button-about:active {  
+  border-top: 1px solid #cde4fc;
+  /* BUTTON SHADOW */
+ box-shadow: 0 0px 0px #002851, 0 3px 0 #002851, 0px 0px 0 #003872, 0px 0px 0 #003872, 0px 2px 4px #000, 0 2px 10px #1b1b1b;
+}
 .button {
   /* POSITIONING */
   padding: 15px;
