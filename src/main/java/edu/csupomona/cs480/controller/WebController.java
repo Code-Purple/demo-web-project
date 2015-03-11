@@ -144,6 +144,24 @@ public class WebController {
 		return new ResponseEntity<Boolean>(HttpStatus.BAD_REQUEST);
 	}
 	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public @ResponseBody ResponseEntity<Boolean> loginUserGet(@RequestParam(value="username", required=false) String username, @RequestParam(value="password", required=false) String password, @RequestHeader(value="Authorization", required=false) String auth) {
+		int retries = 3;
+		
+		while(retries -- > 0){
+			try{
+				if(auth == null)
+					return new ResponseEntity<Boolean>(authManager.checkAuth(jdbcTemplate, username, password), HttpStatus.OK);
+				else
+					return new ResponseEntity<Boolean>(authManager.basicHTTPCheckHeader(jdbcTemplate, auth), HttpStatus.OK);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		
+		return new ResponseEntity<Boolean>(HttpStatus.BAD_REQUEST);
+	}
+	
 	//Submit User Score
 	
 	

@@ -71,7 +71,7 @@ public class AuthenticationManager implements IAuthManager, IBasicHTTPAuth{
 		try{
 			
 			User u = new User().selectByLogin(jdbc, username, password);
-			return u == null;
+			return u != null;
 			
 		}catch(Exception e){
 			e.printStackTrace();
