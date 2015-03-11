@@ -30,7 +30,7 @@ public class ResourceResolver {
     	//if(filePath.charAt(0) != '/')
     		//return null;
     	
-        URL url = ResourceResolver.class.getClassLoader().getResource(filePath);
+        URL url = ClassLoader.getSystemResource(filePath);
         File file = null;
         try {
             file = new File(url.toURI());
@@ -45,7 +45,7 @@ public class ResourceResolver {
     
     public static File[] getAllFilesInFolder(String path){
     	
-    	URL url = ResourceResolver.class.getClassLoader().getResource(path);
+		URL url = ClassLoader.getSystemResource(path);
         File file = null;
         try {
             file = new File(url.toURI());
