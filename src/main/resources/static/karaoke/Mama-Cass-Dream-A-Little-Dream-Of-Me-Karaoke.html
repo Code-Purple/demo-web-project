@@ -9,7 +9,7 @@
     <body>
         <div class="target">
         </div>
-        <audio src="../songs/mamas-and-the-papas-dream-a-little-dream-of-me.mp3" autoplay="autoplay" controls></audio>
+        <audio src="/songs/mamas-and-the-papas-dream-a-little-dream-of-me.mp3" autoplay="autoplay" controls></audio>
     <div id="word-box">
             <input type="button" id="enable-speech" value="Start Singing" /> <input
                 type="button" id="disable-speech" value="Stop Singing"
@@ -76,7 +76,7 @@ $(function() {
             f();
         };
 
-        $.get('jsons/Mama-Cass-Dream-A-Little-Dream-Of-Me.json', function(data) {
+        $.get('/jsons/Mama-Cass-Dream-A-Little-Dream-Of-Me.json', function(data) {
                 var audio = $('audio');
                 audio.on('playing', function() {
                     var delay = data[0].delay || 0;
