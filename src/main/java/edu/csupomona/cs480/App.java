@@ -60,6 +60,10 @@ public class App implements CommandLineRunner{
     
     @Override
     public void run(String... strings) throws Exception {
+    	
+    	//Jar Status
+    	System.out.println("Running In JAR: " + ResourceResolver.IsJar());
+    	
     	//Create DB and Tables
     	System.out.println("Initializing DB!");
 //    	File creationScript = ResourceResolver.getFileFromRelativePath("sql/DB_CREATE.sql");

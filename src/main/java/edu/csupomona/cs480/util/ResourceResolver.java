@@ -95,6 +95,8 @@ public class ResourceResolver {
     		        }
     		    }
 
+    		 }else{
+    			 System.out.format("FileNamesInFolder (JAR): src is null\nPath: %s \n", path);
     		 }
     		 return list;
     	}else{
@@ -116,9 +118,11 @@ public class ResourceResolver {
 	        		}
 	        		return list;
 	        	}else{
+	        		System.out.format("FileNamesInFolder: Path File Not identified as a directory: %s\nResource URL: %s\n", path, url.toString());;
 	        		return null;
 	        	}
 	        }else{
+	        	System.out.format("FileNamesInFolder: Path File is null: %s\n Resource URL: %s\n", path,url.toString());
 	        	return null;
 	        }
     	}
