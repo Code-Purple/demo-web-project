@@ -19,10 +19,32 @@ public class ResourceResolver {
 	public static final Boolean IsJar(){
 //    	final File jarFile = new File(ResourceResolver.class.getProtectionDomain().getCodeSource().getLocation().getPath());
 //		return jarFile.isFile();
-		 String className = ResourceResolver.class.getName().replace('.', '/');
-		 String classJar =
-				 ResourceResolver.class.getResource("/" + className + ".class").toString();
-		 return classJar.startsWith("jar:");
+//		 String className = ResourceResolver.class.getName().replace('.', '/');
+//		 String classJar =
+//				 ResourceResolver.class.getResource("/" + className + ".class").toString();
+//		 return classJar.startsWith("jar:");
+		URL dirURL = ClassLoader.getSystemResource("static");
+		System.out.println(dirURL.toString());
+	      if (dirURL != null && dirURL.getProtocol().equals("file")) {
+	        /* A file path: easy enough */
+	    	 
+	        return false;
+	      } 
+
+	      if (dirURL == null) {
+	        /* 
+	         * In case of a jar file, we can't actually find a directory.
+	         * Have to assume the same jar as clazz.
+	         */
+	        String me = ResourceResolver.class.getName().replace(".", "/")+".class";
+	        dirURL = ResourceResolver.class.getResource(me);
+	      }
+
+	      if (dirURL.getProtocol().equals("jar")) return true;
+	      else{
+	    	  System.out.println("{PrintJar: No Luck : " + dirURL.toString());
+	    	  return false;
+	      }
 	}
 
 	/** The base folder to store all the data used by this project. */
