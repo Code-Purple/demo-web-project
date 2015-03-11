@@ -1,6 +1,7 @@
 package edu.csupomona.cs480.util;
 
 import java.io.File;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 
@@ -26,6 +27,13 @@ public class ResourceResolver {
         return file;
     }
     
+    public static InputStream getStreamFromRelativePath(String filePath) {
+    	//if(filePath.charAt(0) != '/')
+    		//return null;
+    	InputStream stream = ClassLoader.getSystemResourceAsStream(filePath);
+        return stream;
+    }
+    
     public static File getFileFromRelativePath(String filePath) {
     	//if(filePath.charAt(0) != '/')
     		//return null;
@@ -33,7 +41,7 @@ public class ResourceResolver {
         URL url = ClassLoader.getSystemResource(filePath);
         File file = null;
         try {
-            file = new File(url.toURI());
+            file = new File(url.getFile());
         } catch (Exception e) {
         	System.out.println("Resource Resolver: URI Syntax Issue");
         	e.printStackTrace();
@@ -47,11 +55,12 @@ public class ResourceResolver {
     	
 		URL url = ClassLoader.getSystemResource(path);
         File file = null;
-        try {
-            file = new File(url.toURI());
-        } catch (URISyntaxException e) {
-            file = new File(url.getPath());
-        }
+//        try {
+            file = new File(url.getFile());
+//        } 
+//        catch (URISyntaxException e) {
+//            file = new File(url.getPath());
+//        }
         
         if(file != null){
         	if(file.isDirectory()){
@@ -63,4 +72,6 @@ public class ResourceResolver {
         	return null;
         }
     }
+
+	
 }

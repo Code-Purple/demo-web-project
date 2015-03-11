@@ -1,10 +1,15 @@
 package edu.csupomona.cs480.songs;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import org.apache.commons.io.IOUtils;
 
 import edu.csupomona.cs480.models.Song;
 import edu.csupomona.cs480.models.SongNote;
@@ -12,23 +17,36 @@ import edu.csupomona.cs480.models.SongNoteType;
 
 public class SongParser {
 	
-	public static List<Song> parseAll(File[] files){
+	public static List<Song> parseAll(InputStream[] streams){
 		ArrayList<Song> songs = new ArrayList<Song>();
-		for(File file: files){
-			Song n = parseFile(file);
+		for(InputStream stream: streams){
+			Song n = parseStream(stream);
 			if(n != null){
 				songs.add(n);
 			}else{
-				System.out.println("SongParser: Error Parsing File " + file.getName());
+				System.out.println("SongParser: Error Parsing Stream");
 			}
 		}
 		
 		return songs;
 	}
 	
-	public static Song parseFile(File file){
+	public static Song parseStream(InputStream stream) {
+		String s;
 		try {
-			List<String> lines = Files.readAllLines(file.toPath(), Charset.forName("US-ASCII"));
+			s = new String(IOUtils.toByteArray(stream));
+
+			String[] lines = s.split("\n");
+			return parseStringLines(lines);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public static Song parseStringLines(List<String> lines){
+		try {
 			
 			Song song = new Song();
 			
@@ -121,6 +139,36 @@ public class SongParser {
 			}
 			
 			return song;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public static Song parseStringLines(String[] lines){
+		return parseStringLines(Arrays.asList(lines));
+	}
+
+	public static List<Song> parseAll(File[] files){
+		ArrayList<Song> songs = new ArrayList<Song>();
+		for(File file: files){
+			Song n = parseFile(file);
+			if(n != null){
+				songs.add(n);
+			}else{
+				System.out.println("SongParser: Error Parsing File " + file.getName());
+			}
+		}
+		
+		return songs;
+	}
+	
+	public static Song parseFile(File file){
+		try {
+			List<String> lines = Files.readAllLines(file.toPath(), Charset.forName("US-ASCII"));
+			
+			return parseStringLines(lines);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

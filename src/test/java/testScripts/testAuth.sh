@@ -1,5 +1,5 @@
 #Create User - Failure
-T=$(curl -s -o /dev/null -w "%{http_code}\\n" --data "usernam=ryanaaaaabryanaaaaabryanaaaaabryanaaaaabryanaaaaabryanaaaaabryanaaaaa&passwor=ey" http://localhost:8080/users)
+T=$(curl -s -o /dev/null -w "%{http_code}\\n" --data "username=bryanaaaaabryanaaaaabryanaaaaabryanaaaaabryanaaaaabryanaaaaabryanaaaaa&password=hey" http://localhost:8080/users)
 
 if [ "$T1=400" ]; then
     echo "Test 1 Passed."
@@ -8,7 +8,7 @@ else
 fi
 
 #Create User - Successful
-T2=$(curl -s -o /dev/null -w "%{http_code}\\n" --data "usernam=ryan&passwor=ey" http://localhost:8080/users)
+T2=$(curl -s -o /dev/null -w "%{http_code}\\n" --data "username=bryan&password=hey" http://localhost:8080/users)
 if [ "$T2"="200" ]; then
     echo "Test 2 Passed."
 else
@@ -33,16 +33,16 @@ else
 fi
 
 #Login Params - Successful
-T5=$(curl -s -o /dev/null -w "%{http_code}\\n" --data "usernam=ryan&passwor=ey" http://localhost:8080/login)
+T5=$(curl -s -o /dev/null -w "%{http_code}\\n" --data "username=bryan&password=hey" http://localhost:8080/login)
 
-if [ "$T5"="false" ]; then
+if [ "$T5"="true" ]; then
     echo "Test 5 Passed."
 else
     echo "Test 5 Failed."
 fi
 
 #Login Params - Failure
-T6=$(curl -s -o /dev/null -w "%{http_code}\\n" --data "usernam=ryan&passwor=eys" http://localhost:8080/login)
+T6=$(curl -s -o /dev/null -w "%{http_code}\\n" --data "username=bryan&passwor=eys" http://localhost:8080/login)
 
 if [ "$T6"="false" ]; then
     echo "Test 6 Passed."
