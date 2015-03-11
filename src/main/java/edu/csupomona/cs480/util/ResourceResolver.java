@@ -3,13 +3,15 @@ package edu.csupomona.cs480.util;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.JarURLConnection;
 import java.net.URL;
 import java.security.CodeSource;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Enumeration;
 import java.util.List;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 /**
  * This is an utility class to help file locating.
@@ -111,15 +113,31 @@ public class ResourceResolver {
 
     		if( src != null ) {
     		    URL jar = src.getLocation();
-    		    ZipInputStream zip = new ZipInputStream( jar.openStream());
-    		    ZipEntry ze = null;
-
-    		    while( ( ze = zip.getNextEntry() ) != null ) {
-    		        String entryName = ze.getName();
-    		        if( entryName.startsWith(path + '/')) {
+//    		    ZipInputStream zip = new ZipInputStream( jar.openStream());
+//    		    ZipEntry ze = null;
+    		    
+    		    JarURLConnection juc = (JarURLConnection)jar.openConnection();
+    		    JarFile jf = juc.getJarFile();
+    		    System.out.println("JarFile: " + jf.getName());
+    		    Enumeration<JarEntry> entries = jf.entries();
+    		    for(JarEntry je = entries.nextElement(); entries.hasMoreElements(); je = entries.nextElement())
+    		    {
+    		    	String entryName = je.getName();
+    		    	if(path.charAt(path.length() - 1) != '/'){
+    		    		path = path + '/';
+    		    	}
+    		    	
+    		        if( entryName.startsWith(path)) {
     		            list.add( entryName  );
     		        }
     		    }
+
+//    		    while( ( ze = zip.getNextEntry() ) != null ) {
+//    		        String entryName = ze.getName();
+//    		        if( entryName.startsWith(path + '/')) {
+//    		            list.add( entryName  );
+//    		        }
+//    		    }
 
     		 }else{
     			 System.out.format("FileNamesInFolder (JAR): src is null\nPath: %s \n", path);
