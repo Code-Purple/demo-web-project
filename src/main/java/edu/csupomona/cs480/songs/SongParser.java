@@ -17,7 +17,7 @@ import edu.csupomona.cs480.models.SongNoteType;
 
 public class SongParser {
 	
-	public static List<Song> parseAll(InputStream[] streams){
+	public static List<Song> parseAll(List<InputStream> streams){
 		ArrayList<Song> songs = new ArrayList<Song>();
 		for(InputStream stream: streams){
 			Song n = parseStream(stream);

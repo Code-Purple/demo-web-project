@@ -1,14 +1,25 @@
 package edu.csupomona.cs480.util;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
-import java.net.URISyntaxException;
 import java.net.URL;
+import java.security.CodeSource;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 /**
  * This is an utility class to help file locating.
  */
 public class ResourceResolver {
+	
+	public static final Boolean IsJar(){
+    	final File jarFile = new File(ResourceResolver.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+		return jarFile.isFile();
+	}
 
 	/** The base folder to store all the data used by this project. */
     private static final String BASE_DIR = System.getProperty("user.home") + "/cs480";
@@ -51,26 +62,77 @@ public class ResourceResolver {
         }
     }
     
-    public static File[] getAllFilesInFolder(String path){
+    public static List<InputStream> getAllStreamsInFolder(String path) throws IOException{
+    	List<String> names = getAllFileNamesInFolder(path);
+    	List<InputStream> streams = new ArrayList<InputStream>();
+    	for(String name: names){
+    		InputStream s = ResourceResolver.getStreamFromRelativePath(name);
+    		if(s != null){
+    			streams.add(s);
+    		}else{
+    			System.out.println("Failed to get Stream at: " + name);
+    		}
+    	}
+    	return streams;
     	
-		URL url = ClassLoader.getSystemResource(path);
-        File file = null;
-//        try {
-            file = new File(url.getFile());
-//        } 
-//        catch (URISyntaxException e) {
-//            file = new File(url.getPath());
-//        }
-        
-        if(file != null){
-        	if(file.isDirectory()){
-        		return file.listFiles();
-        	}else{
-        		return null;
-        	}
-        }else{
-        	return null;
-        }
+    	
+    }
+    
+    public static List<String> getAllFileNamesInFolder(String path) throws IOException{
+    	if(IsJar()) {  // Run with JAR file
+    		CodeSource src = ResourceResolver.class.getProtectionDomain().getCodeSource();
+    		List<String> list = new ArrayList<String>();
+
+    		if( src != null ) {
+    		    URL jar = src.getLocation();
+    		    ZipInputStream zip = new ZipInputStream( jar.openStream());
+    		    ZipEntry ze = null;
+
+    		    while( ( ze = zip.getNextEntry() ) != null ) {
+    		        String entryName = ze.getName();
+    		        if( entryName.startsWith(path + '/')) {
+    		            list.add( entryName  );
+    		        }
+    		    }
+
+    		 }
+    		 return list;
+    	}else{
+    	
+			URL url = ClassLoader.getSystemResource(path);
+	        File file = null;
+	//        try {
+	            file = new File(url.getFile());
+	//        } 
+	//        catch (URISyntaxException e) {
+	//            file = new File(url.getPath());
+	//        }
+	        
+	        if(file != null){
+	        	if(file.isDirectory()){
+	        		List<String> list = Arrays.asList(file.list());
+	        		for(int i = 0; i<list.size(); ++i){
+	        			list.set(i, path + "/" + list.get(i));
+	        		}
+	        		return list;
+	        	}else{
+	        		return null;
+	        	}
+	        }else{
+	        	return null;
+	        }
+    	}
+    }
+    
+    public static List<File> getAllFilesInFolder(String path) throws IOException{
+    	List<String> names = ResourceResolver.getAllFileNamesInFolder(path);
+    	List<File> files = new ArrayList<File>();
+    	for(String n : names){
+    		files.add(ResourceResolver.getFileFromRelativePath(n));
+    	}
+    	
+    	return files;
+    	
     }
 
 	

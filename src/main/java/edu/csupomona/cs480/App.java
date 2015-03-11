@@ -1,9 +1,11 @@
 package edu.csupomona.cs480;
 
 import java.io.File;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.util.List;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -60,16 +62,22 @@ public class App implements CommandLineRunner{
     public void run(String... strings) throws Exception {
     	//Create DB and Tables
     	System.out.println("Initializing DB!");
-    	File creationScript = ResourceResolver.getFileFromRelativePath("sql/DB_CREATE.sql");
-    	String sql = new String(Files.readAllBytes(creationScript.toPath()));
+//    	File creationScript = ResourceResolver.getFileFromRelativePath("sql/DB_CREATE.sql");
+//    	String sql = new String(Files.readAllBytes(creationScript.toPath()));
+    	
+    	InputStream creationScriptStream = ResourceResolver.getStreamFromRelativePath("sql/DB_CREATE.sql");
+    	String sql = new String(IOUtils.toByteArray(creationScriptStream));
     	
     	jdbcTemplate.execute(sql);
     	
     	System.out.println("DB Initialized.");
     	
     	//Populate DB with Parsed Values of each song...
-    	File[] songFiles = ResourceResolver.getAllFilesInFolder("static/lyrics");
-    	List<Song> songList = SongParser.parseAll(songFiles);
+//    	File[] songFiles = ResourceResolver.getAllFilesInFolder("static/lyrics");
+//    	List<Song> songList = SongParser.parseFiles(songFiles);
+//    	
+    	List<InputStream> streams = ResourceResolver.getAllStreamsInFolder("static/lyrics");
+    	List<Song> songList = SongParser.parseAll(streams);
     	
     	//Insert Each Song
     	for(Song s:songList){
