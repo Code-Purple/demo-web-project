@@ -57,7 +57,7 @@ public class WebController {
 	 */
 	
 	//Search Songs
-	@RequestMapping(value = "/songs/search/{query}", method = RequestMethod.GET)
+	@RequestMapping(value = "api/songs/search/{query}", method = RequestMethod.GET)
 	public ResponseEntity<List<Song>> searchSongs(@PathVariable("query") String query, 
 			@RequestHeader(value = "Authorization", required = false) String auth, @RequestParam(value="username", required = false) String username,  @RequestParam(value="password", required = false) String password) {
 		
@@ -73,7 +73,7 @@ public class WebController {
 	}
 	
 	//Get Song Including Notes
-	@RequestMapping(value = "/songs/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "api/songs/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Song> getSong(@PathVariable("id") int id,
 			@RequestHeader(value = "Authorization", required = false) String auth, @RequestParam(value="username", required = false) String username,  @RequestParam(value="password", required = false) String password) {
 		
@@ -92,7 +92,7 @@ public class WebController {
 	}
 	
 	//Create User
-	@RequestMapping(value = "/users", method = RequestMethod.POST)
+	@RequestMapping(value = "api/users", method = RequestMethod.POST)
 	public @ResponseBody ResponseEntity<User> createUser(@RequestParam("username") String username, @RequestParam("password") String password, @RequestHeader(value = "Authorization", required = false) String auth) {
 		User u = new User();
 		
@@ -126,7 +126,7 @@ public class WebController {
 	}
 	
 	//Check User login
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "api/login", method = RequestMethod.POST)
 	public @ResponseBody ResponseEntity<Boolean> loginUser(@RequestParam(value="username", required=false) String username, @RequestParam(value="password", required=false) String password, @RequestHeader(value="Authorization", required=false) String auth) {
 		int retries = 3;
 		
@@ -144,7 +144,7 @@ public class WebController {
 		return new ResponseEntity<Boolean>(HttpStatus.BAD_REQUEST);
 	}
 	
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@RequestMapping(value = "api/login", method = RequestMethod.GET)
 	public @ResponseBody ResponseEntity<Boolean> loginUserGet(@RequestParam(value="username", required=false) String username, @RequestParam(value="password", required=false) String password, @RequestHeader(value="Authorization", required=false) String auth) {
 		int retries = 3;
 		
