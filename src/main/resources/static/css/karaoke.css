@@ -11,7 +11,8 @@ body {
     background-repeat: no-repeat;
 }
 .target {
-    margin: 25em 0 0 54em;
+    margin: 0 auto;
+    width: 50%;
     display: block;
     overflow: auto;
 }
@@ -27,7 +28,7 @@ audio {
     float: left;
     position: relative;
 
-    font-size: 20px;
+    font-size: 60px;
     letter-spacing: 2px;
     margin-left: -1px;
     padding: 0;
