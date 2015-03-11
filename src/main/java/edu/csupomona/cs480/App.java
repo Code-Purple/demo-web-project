@@ -93,7 +93,7 @@ public class App implements CommandLineRunner{
     			n.insert(jdbcTemplate);
     		}
     		
-    		s.printLyrics();
+    		//s.printLyrics();
     	}
     	
     	//Test!

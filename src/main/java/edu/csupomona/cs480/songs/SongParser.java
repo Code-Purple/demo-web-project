@@ -61,7 +61,7 @@ public class SongParser {
 				//Determine type of line
 				if(charArr[0] == '#'){
 					String[] headercomps = line.split(":");
-					System.out.println(headercomps[0] + " : " + headercomps[1]);
+					//System.out.println(headercomps[0] + " : " + headercomps[1]);
 					//HEADER
 					if(headercomps[0].equals("#title"))
 						song.name = headercomps[1];

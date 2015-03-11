@@ -63,7 +63,7 @@ public class Song extends DataModel{
 					line += note.text.replace("~", "");
 				}else{
 					this.lyricLines.add(line);
-					System.out.println(line);
+					//System.out.println(line);
 					line = "";
 				}
 			}
