@@ -127,17 +127,10 @@ public class ResourceResolver {
     		    		path = path + '/';
     		    	}
     		    	
-    		        if( entryName.startsWith(path)) {
+    		        if(entryName.startsWith(path)) {
     		            list.add( entryName  );
     		        }
     		    }
-
-//    		    while( ( ze = zip.getNextEntry() ) != null ) {
-//    		        String entryName = ze.getName();
-//    		        if( entryName.startsWith(path + '/')) {
-//    		            list.add( entryName  );
-//    		        }
-//    		    }
 
     		 }else{
     			 System.out.format("FileNamesInFolder (JAR): src is null\nPath: %s \n", path);

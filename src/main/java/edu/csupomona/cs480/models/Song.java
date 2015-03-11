@@ -151,12 +151,9 @@ public class Song extends DataModel{
 	public PreparedStatement getInsertStatement(JdbcTemplate jdbc)
 			throws SQLException {
 		
-		PreparedStatement pState = jdbc.getDataSource().getConnection().prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS);
+		PreparedStatement pState = getBlankInsertStatement(jdbc);
+		setInsertStatementParams(jdbc, pState);
 		
-		pState.setString(1, name);
-		pState.setString(2, artist);
-		pState.setInt(3, BPM);
-		pState.setInt(4, GAP);
 		return pState;
 	}
 
@@ -164,5 +161,21 @@ public class Song extends DataModel{
 		if(this.notes == null){
 			this.notes = new SongNote().selectBySongOrdered(this.id, jdbc);
 		}
+	}
+
+	@Override
+	public PreparedStatement getBlankInsertStatement(JdbcTemplate jdbc)
+			throws SQLException {
+		return jdbc.getDataSource().getConnection().prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS);
+
+	}
+
+	@Override
+	protected void setInsertStatementParams(JdbcTemplate jdbc,
+			PreparedStatement pState) throws SQLException {
+		pState.setString(1, name);
+		pState.setString(2, artist);
+		pState.setInt(3, BPM);
+		pState.setInt(4, GAP);
 	}
 }

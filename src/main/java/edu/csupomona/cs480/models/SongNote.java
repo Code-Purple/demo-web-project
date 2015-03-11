@@ -106,8 +106,20 @@ public class SongNote extends DataModel{
 	public PreparedStatement getInsertStatement(JdbcTemplate jdbc)
 			throws SQLException {
 		
-		PreparedStatement pState = jdbc.getDataSource().getConnection().prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS);
-
+		PreparedStatement pState = this.getBlankInsertStatement(jdbc);
+		setInsertStatementParams(jdbc,pState);
+		
+		return pState;
+	}
+	@Override
+	public PreparedStatement getBlankInsertStatement(JdbcTemplate jdbc)
+			throws SQLException {
+		return jdbc.getDataSource().getConnection().prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS);
+	}
+	
+	@Override
+	protected void setInsertStatementParams(JdbcTemplate jdbc,
+			PreparedStatement pState) throws SQLException {
 		pState.setInt(1, sequenceNum);
 		pState.setInt(2, startBeat);
 		pState.setInt(3, duration);
@@ -115,6 +127,6 @@ public class SongNote extends DataModel{
 		pState.setLong(5, songId);
 		pState.setString(6, text);
 		pState.setLong(7, noteTypeID);
-		return pState;
+		
 	}
 }

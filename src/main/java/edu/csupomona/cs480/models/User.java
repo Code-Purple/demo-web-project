@@ -28,11 +28,8 @@ public class User extends DataModel{
 	public PreparedStatement getInsertStatement(JdbcTemplate jdbc)
 			throws SQLException {
 		
-		PreparedStatement pState = jdbc.getDataSource().getConnection().prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS);
-		
-		pState.setString(1, username);
-		pState.setString(2, password);
-		
+		PreparedStatement pState = this.getBlankInsertStatement(jdbc);
+		this.setInsertStatementParams(jdbc, pState);
 		return pState;
 	}
 	@Override
@@ -105,5 +102,23 @@ public class User extends DataModel{
 			System.out.println("Select Login User: More than one returned.");
 			return result.get(0);
 		}
+	}
+
+
+	@Override
+	public PreparedStatement getBlankInsertStatement(JdbcTemplate jdbc)
+			throws SQLException {
+		return jdbc.getDataSource().getConnection().prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS);
+		
+	}
+
+
+	@Override
+	protected void setInsertStatementParams(JdbcTemplate jdbc,
+			PreparedStatement pState) throws SQLException {
+		// TODO Auto-generated method stub
+		pState.setString(1, username);
+		pState.setString(2, password);
+		
 	}
 }

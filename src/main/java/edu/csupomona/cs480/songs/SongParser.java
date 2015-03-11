@@ -137,7 +137,7 @@ public class SongParser {
 					
 				}
 			}
-			
+			System.out.println("Parsed: " + song.name + ":" + song.artist);
 			return song;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

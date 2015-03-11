@@ -1,9 +1,10 @@
 package edu.csupomona.cs480;
 
-import java.io.File;
 import java.io.InputStream;
-import java.nio.file.Files;
+import java.sql.PreparedStatement;
 import java.util.List;
+
+import javax.sql.DataSource;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +12,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import edu.csupomona.cs480.auth.AuthenticationManager;
+import edu.csupomona.cs480.config.Config;
 import edu.csupomona.cs480.data.provider.FSUserManager;
 import edu.csupomona.cs480.data.provider.UserManager;
 import edu.csupomona.cs480.models.Song;
@@ -45,6 +47,13 @@ public class App implements CommandLineRunner{
     	AuthenticationManager auth = new AuthenticationManager();
         return auth;
     }
+    
+    @Bean
+    public JdbcTemplate jdbdProvider() {
+    	DataSource source = new DriverManagerDataSource(Config.DB_CONNECTION_STRING);
+    	JdbcTemplate jdbc = new JdbcTemplate(source);
+        return jdbc;
+    }
 
     /**
      * This is the running main method for the web application.
@@ -69,34 +78,53 @@ public class App implements CommandLineRunner{
 //    	File creationScript = ResourceResolver.getFileFromRelativePath("sql/DB_CREATE.sql");
 //    	String sql = new String(Files.readAllBytes(creationScript.toPath()));
     	
-    	InputStream creationScriptStream = ResourceResolver.getStreamFromRelativePath("sql/DB_CREATE.sql");
-    	String sql = new String(IOUtils.toByteArray(creationScriptStream));
+    	boolean first = false;
+    	try{
+    		first = new Song().selectAll(jdbcTemplate).size() == 0;
+    	}catch(Exception e){
+    		e.printStackTrace();
+    		first=true;
+    	}
     	
-    	jdbcTemplate.execute(sql);
-    	
-    	System.out.println("DB Initialized.");
-    	
-    	//Populate DB with Parsed Values of each song...
-//    	File[] songFiles = ResourceResolver.getAllFilesInFolder("static/lyrics");
-//    	List<Song> songList = SongParser.parseFiles(songFiles);
-//    	
-    	List<InputStream> streams = ResourceResolver.getAllStreamsInFolder("static/lyrics");
-    	List<Song> songList = SongParser.parseAll(streams);
-    	
-    	//Insert Each Song
-    	for(Song s:songList){
-    		long sId = s.insert(jdbcTemplate);
-    		
-    		//Update Reference in SongNote + Insert Notes
-    		for(SongNote n : s.notes){
-    			n.songId = sId;
-    			n.insert(jdbcTemplate);
-    		}
-    		
-    		//s.printLyrics();
+    	if(first){
+	    	InputStream creationScriptStream = ResourceResolver.getStreamFromRelativePath("sql/DB_CREATE.sql");
+	    	String sql = new String(IOUtils.toByteArray(creationScriptStream));
+	    	
+	    	jdbcTemplate.execute(sql);
+	    	
+	    	System.out.println("DB Initialized.");
+	    	
+	    	//Populate DB with Parsed Values of each song...
+	//    	File[] songFiles = ResourceResolver.getAllFilesInFolder("static/lyrics");
+	//    	List<Song> songList = SongParser.parseFiles(songFiles);
+	//    	
+	    	List<InputStream> streams = ResourceResolver.getAllStreamsInFolder("static/lyrics");
+	    	List<Song> songList = SongParser.parseAll(streams);
+	    	
+	    	PreparedStatement batch = new SongNote().getBlankInsertStatement(jdbcTemplate);
+	    	batch.getConnection().setAutoCommit(false);
+	    	//Insert Each Song
+	    	for(Song s:songList){
+	    		long sId = s.insert(jdbcTemplate);
+	    		
+	    		//Update Reference in SongNote + Insert Notes
+	    		for(SongNote n : s.notes){
+	    			n.songId = sId;
+	    			n.insertBatch(jdbcTemplate, batch);
+	    		}
+	    		try{
+	    			batch.executeBatch();
+	    		}catch(Exception e){
+	    			
+	    		}
+	    		batch.getConnection().commit();
+	    		
+	    		//s.printLyrics();
+	    	}
     	}
     	
     	//Test!
+    	System.out.println("Testing Song DB. Printing All Songs.");
     	List<Song> all = (List<Song>) new Song().selectAll(jdbcTemplate);
     	for(Song s: all){
     		System.out.println(s.toString());
