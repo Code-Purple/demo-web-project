@@ -52,7 +52,7 @@ $(function() {
                 var now = new Date().getTime();
                 while(i < timeline.length && timeline[i].action != 'break') {
                     var data = timeline[i];
-                    target.append(buildWord({word: data.part,  gender: 'girl',  start: data.start - (now - start),  duration: data.dur, marginleft: data.marginleft}));
+                    target.append(buildWord({word: data.part,  gender: 'blue-highlight',  start: data.start - (now - start),  duration: data.dur, marginleft: data.marginleft}));
                     i++;
                 }
 

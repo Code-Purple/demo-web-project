@@ -11,24 +11,24 @@ body {
     background-repeat: no-repeat;
 }
 .target {
-    margin: 0 auto;
+    margin: 18em 35em;
     width: 50%;
     display: block;
     overflow: auto;
 }
 audio {
     display: block;
-    margin: 15em auto;
+    margin: 0em 50em;
 }
 
 #word-box{
-    margin: -30em 2em 2em 0em;
+    margin: -18em 40em;
 }
 .word {
     float: left;
     position: relative;
 
-    font-size: 60px;
+    font-size: 80px;
     letter-spacing: 2px;
     margin-left: -1px;
     padding: 0;
@@ -112,11 +112,12 @@ audio {
     position: relative;
     word-break: break-word;
     height: 100%;
+    padding: .025em;
 }
 
 #speech-page-content {
-    width: 800px;
-    height: 100px;
+    width: 40em;
+    height: 15em;
     background-color:#F7D6FF;
     border: 2px double #AD96B2;
     resize: none;
