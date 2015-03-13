@@ -64,9 +64,9 @@
           };
         };
  
-        var states = ['Dream a Little Dream of Me', 'Sweet Child O\' Mine', 'Happy', 'Shake it Off', 
-                      'Livin\' on a Prayer', 'All About That Bass', 'Meghan Trainor', 'Bon Jovi', 
-                      'Pharell Williams', 'Mamas and the Papas', 'Guns N\' Roses', 'Taylor Swift'
+        var states = ['Dream a Little Dream of Me', 'Mamas and the Papas',
+                      'Happy', 'Pharell Williams',
+                      'Livin\' on a Prayer', 'Bon Jovi',
         ];
          
         $('#search .songTA').typeahead({
@@ -97,34 +97,16 @@
 				
 			}
 			
-			if (input.toLowerCase().indexOf("sweet child o\' mine") != -1 ||
-					input.toLowerCase().indexOf("guns n\' roses") != -1)
-			{
-				window.location.href = "sweet_child_of_mine.html";
-			}
-			
-			if (input.toLowerCase().indexOf("happy") != -1 ||
+            if (input.toLowerCase().indexOf("happy") != -1 ||
 					input.toLowerCase().indexOf("pharell williams") != -1)
 			{
 				window.location.href = "happy_pharrell.html";
 			}
 			
-			if (input.toLowerCase().indexOf("shake it off") != -1 ||
-					input.toLowerCase().indexOf("taylor swift") != -1)
-			{
-				window.location.href = "shake_it_off.html";
-			}
-			
-			if (input.toLowerCase().indexOf("livin\' on a prayer") != -1 ||
+            if (input.toLowerCase().indexOf("livin\' on a prayer") != -1 ||
 					input.toLowerCase().indexOf("bon jovi") != -1)
 			{
 				window.location.href = "livin_on_a_prayer.html";
-			}
-			
-			if (input.toLowerCase().indexOf("all about that bass") != -1 ||
-					input.toLowerCase().indexOf("meghan trainor") != -1)
-			{
-				window.location.href = "all_about_that_bass.html";
 			}
 		}
 	}
