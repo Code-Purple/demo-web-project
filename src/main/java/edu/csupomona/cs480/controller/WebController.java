@@ -234,6 +234,7 @@ public class WebController {
 		return f.format(d);
 	}
 	
+	
 	/*@RequestMapping(value = "/index.html", method = RequestMethod.GET, params="search")
 	public @ResponseBody void byParameter(@RequestParam("search") String search) 
 	{
